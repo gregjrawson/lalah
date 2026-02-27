@@ -304,6 +304,15 @@ font-size:18px;
   box-sizing:border-box;
 }
 
+/* LOCAL BLOCK SCREEN */
+#screen-local{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  z-index:2;
+  box-sizing:border-box;
+}
+
 .fail-wrap{
   position:absolute;
   left:50%;
@@ -925,6 +934,14 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
       </div>
     </div>
 
+    <!-- LOCAL BLOCK -->
+<div id='screen-local' style='display:none;'>
+  <div class='fail-wrap'>
+    <div class='fail-main'>Local detected!</div>
+    <div class='fail-sub'>Cannot liddat</div>
+  </div>
+</div>
+
     <!-- REWARD -->
     <div id='screen-reward' style='display:none;'>
       <div class='success-wrap'>
@@ -997,6 +1014,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
   const screenReward = document.getElementById('screen-reward');
   const successMain = document.getElementById('successMain');
   const screenFail = document.getElementById('screen-fail');
+  const screenLocal = document.getElementById('screen-local');
 
   const phoneInput = document.getElementById('phone');
   const phoneMsg = document.getElementById('phoneMsg');
@@ -1283,6 +1301,16 @@ const recentFailLines = [];
 }
   };
 
+  const gotoLocalBlock = () => {
+  cancelTyping();
+  hide(screenPhone);
+  hide(screenPhrase);
+  hide(screenReward);
+  hide(screenFail);
+  show(screenLocal);
+  setBg('blank');
+};
+
   // ---------- PHRASES ----------
   const setNewPhrase = () => {
     let next = currentPhrase;
@@ -1380,8 +1408,9 @@ phraseText.classList.add('lines-' + lineCount);
     const rawValue = phoneInput.value || '';
     const num = rawValue.replace(/\D/g, '');
 
-    if(dial === '65'){
-      phoneMsg.textContent = 'Eh you local? This app only for tourists lah.';
+    if(dial === '65'){z
+      phoneMsg.textContent = '';
+      gotoLocalBlock();
       return;
     }
 
