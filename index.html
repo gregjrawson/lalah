@@ -756,7 +756,10 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
   margin-top:calc(10px + 7.5vh);
 }
 
-#screen-reward .timer{ top:62vh; }
+#screen-reward .timer{
+  top:auto;
+  bottom:calc(140px + env(safe-area-inset-bottom));
+}
 
 .reward-bottom{
   position:absolute;
