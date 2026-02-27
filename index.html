@@ -1036,31 +1036,33 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
   };
 
   // ---------- GATES (single source of truth) ----------
-  const applyGates = () => {
-    const desktop = isDesktopLike();
-    const dev = isDev() || qs().get('test') === '1';
+const applyGates = () => {
+  const desktop = isDesktopLike();
+  const loc = getLoc();
+  const hasLoc = !!loc;
+  const dev = isDev() || qs().get('test') === '1';
 
-    // Desktop blocker: desktop AND not dev
-    if(desktop && !dev){
-      if(desktopBlocker) desktopBlocker.style.display = 'flex';
-      if(qrGate) qrGate.style.display = 'none';
-      wrap.style.display = 'none';
-      return;
-    }
+  // Desktop blocker: desktop AND not dev
+  if (desktop && !dev) {
+    if (desktopBlocker) desktopBlocker.style.display = 'flex';
+    if (qrGate) qrGate.style.display = 'none';
+    wrap.style.display = 'none';
+    return;
+  }
 
-    // QR gate: mobile AND not dev
-    if(!desktop && !dev){
-      if(desktopBlocker) desktopBlocker.style.display = 'none';
-      if(qrGate) qrGate.style.display = 'flex';
-      wrap.style.display = 'none';
-      return;
-    }
+  // QR gate: mobile AND not dev AND no loc
+  if (!desktop && !dev && !hasLoc) {
+    if (desktopBlocker) desktopBlocker.style.display = 'none';
+    if (qrGate) qrGate.style.display = 'flex';
+    wrap.style.display = 'none';
+    return;
+  }
 
-    // Allowed: dev (any device)
-    if(desktopBlocker) desktopBlocker.style.display = 'none';
-    if(qrGate) qrGate.style.display = 'none';
-    wrap.style.display = '';
-  };
+  // Allowed: dev OR mobile with loc
+  if (desktopBlocker) desktopBlocker.style.display = 'none';
+  if (qrGate) qrGate.style.display = 'none';
+  wrap.style.display = '';
+};
 
   let gateRaf = 0;
   const scheduleGates = () => {
