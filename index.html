@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<title>LaLah</title>
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css' />
+
+<link rel='preconnect' href='https://fonts.googleapis.com' />
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+<link href='https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap' rel='stylesheet' />
+
+<style>
+:root{
+--bg:#000;
+--panel:#111;
+--panel2:#1a1a1a;
+--text:#fff;
+--muted:#bdbdbd;
+--border:#7a7a7a;
+--border2:#9a9a9a;
+--accent:#F90355;
+
+/* one consistent tilt system */
+--tilt:-15deg;
+--tiltSkew:15deg;
+}
+
+/* ✅ iOS Safari viewport fix */
+html,body{height:100%;}
+body{
+min-height:100svh;
+}
+@supports (height: 100dvh){
+  body{ min-height:100dvh; }
+}
+
+body{
+margin:0;
+background-color:var(--bg);
+background-image:url('bg-light.jpg');
+background-size:cover;
+background-position:center top;
+background-repeat:no-repeat;
+color:var(--text);
+font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+text-align:center;
+}
+
+/* force Oswald everywhere (inputs/buttons don't always inherit) */
+html, body, input, button, textarea, select{
+  font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+}
+
+.wrap{
+min-height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:22px 16px;
+box-sizing:border-box;
+}
+
+.card{
+width:min(760px,92vw);
+margin:0 auto;
+}
+
+.logo{
+width:min(220px,45vw);
+max-width:220px;
+display:block;
+margin:0 auto 16px;
+}
+
+.sub{
+font-size:clamp(14px,2.0vw,18px);
+margin:0 0 12px;
+font-weight:600;
+}
+
+.row{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin-top:14px;
+}
+
+.btn{
+padding:12px 22px;
+font-size:16px;
+font-weight:700;
+border-radius:12px;
+border:0;
+cursor:pointer;
+background:#fff;
+color:#000;
+min-width:132px;
+}
+.btn:hover{opacity:0.92;}
+
+.btn.dark{
+background:transparent;
+color:#fff;
+border:2px solid #fff;
+}
+
+.msg{
+margin-top:14px;
+min-height:22px;
+font-size:16px;
+font-weight:800;
+color:#ff3b30;
+}
+
+.phone-area{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:12px;
+margin-top:14px;
+flex-wrap:wrap;
+}
+
+/* input wrapper (default, other screens) */
+.iti{
+width:min(480px,92vw);
+max-width:480px;
+border-radius:16px;
+background:var(--panel);
+overflow:visible;
+box-shadow:0 0 0 4px var(--border);
+}
+
+.iti__country-list{
+z-index:9999 !important;
+}
+
+#phone{
+width:100%;
+padding:14px 14px;
+font-size:18px;
+border:none;
+background:transparent;
+color:var(--text);
+outline:none;
+box-sizing:border-box;
+font-family:'Oswald',sans-serif;
+}
+
+.iti--separate-dial-code .iti__selected-flag{
+background:transparent;
+border-radius:12px 0 0 12px;
+}
+
+.iti__selected-dial-code{
+color:var(--text);
+font-weight:700;
+}
+
+.iti__country-list{
+background:#fff!important;
+color:#000!important;
+border-radius:12px;
+overflow:auto;
+border:1px solid #ddd;
+}
+.iti__country{color:#000!important;}
+.iti__country:hover{background:#f1f1f1!important;}
+.iti__country.iti__highlight{background:#eaeaea!important;}
+
+.store-link{
+margin-top:18px;
+font-size:14px;
+color:#fff;
+cursor:pointer;
+text-decoration:underline;
+}
+.store-link:hover{color:#fff;}
+
+/* STORE MODAL */
+.store-modal{
+display:none;
+position:fixed;
+inset:0;
+background:linear-gradient(180deg,rgba(0,0,0,0.75),rgba(0,0,0,0.92));
+backdrop-filter:blur(6px);
+z-index:1000001;
+align-items:center;
+justify-content:center;
+}
+
+.store-modal-content{
+  width:min(600px,92vw);
+  padding:36px 28px;
+  border-radius:28px;
+
+  background:url('bg-blank.jpg') no-repeat center bottom;
+  background-size:cover;
+
+  box-shadow:0 35px 90px rgba(0,0,0,0.55);
+
+  text-align:left;
+  max-height:80vh;
+  overflow-y:auto;
+  position:relative;
+}
+
+.store-modal-content h2{
+text-align:center;
+margin-top:0;
+margin-bottom:4px;
+}
+
+.store-modal-sub{
+text-align:center;
+margin:0 0 24px;
+color:#FC8983;
+font-size:14px;
+}
+
+.store-item{
+  margin:0;
+  padding:18px 0;
+  font-size:15px;
+  line-height:1.45;
+  color:#fff;
+  font-weight:500;
+  border-top:1px solid rgba(255,255,255,0.22);
+}
+
+.store-item strong{
+  font-weight:600;
+}
+
+.store-item{
+  font-weight:400;
+}
+
+.store-item br + *{
+  font-weight:400;
+  opacity:0.85;
+}
+
+.store-item:first-of-type{
+  border-top:none;
+  padding-top:6px;
+}
+
+.reward-tag{
+  color:rgba(255,255,255,0.85);
+  font-weight:600;
+}
+
+.store-close{
+position:absolute;
+right:24px;
+top:20px;
+cursor:pointer;
+font-size:18px;
+}
+
+.timer{
+  position:absolute;
+  left:50%;
+  top:60vh;
+  transform:translateX(-50%);
+
+  font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+  font-size:clamp(14px,2.5vw,18px);
+  font-weight:500;
+  letter-spacing:1px;
+
+  color:#FC8983;
+  opacity:0.85;
+}
+
+/* ✅ make full-screen screens use iOS-safe viewport */
+#screen-fail,
+#screen-phone.home,
+#screen-phrase,
+#screen-reward{
+  min-height:100svh;
+}
+@supports (height: 100dvh){
+  #screen-fail,
+  #screen-phone.home,
+  #screen-phrase,
+  #screen-reward{
+    min-height:100dvh;
+  }
+}
+
+/* FAIL SCREEN */
+#screen-fail{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  z-index:2;
+  box-sizing:border-box;
+}
+
+.fail-wrap{
+  position:absolute;
+  left:50%;
+  top:52vh;
+  transform:translate(-50%,-50%);
+  width:min(760px,92vw);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  pointer-events:auto;
+}
+
+.fail-main{
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:clamp(96px,19vw,192px);
+  line-height:1.05;
+  color:#000;
+  margin-bottom:-6px;
+  animation:oopsWrong 1040ms cubic-bezier(.2,.9,.25,1.2) both;
+
+  transform:rotate(-14deg) skewX(-15deg);
+  transform-origin:center;
+  display:block;
+}
+
+.fail-sub{
+  margin-top:0.9em;
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:clamp(28px,6vw,60px);
+  line-height:1.4;
+  color:#FC8983;
+  opacity:0;
+  animation:failSubFade 800ms ease-out 1100ms forwards;
+  display:inline-block;
+  transform:rotate(-14deg) skewX(-15deg);
+}
+
+.fail-pill{
+  margin-top:150px;
+  width:min(240px,78vw);
+  height:60px;
+  border-radius:999px;
+  border:0;
+  background:#F90355;
+  color:#fff;
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:clamp(26px,6vw,44px);
+  letter-spacing:1px;
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(0,0,0,0.22);
+}
+.fail-pill:hover{ opacity:0.92; }
+
+/* HOME */
+#screen-phone.home{
+position:fixed;
+inset:0;
+width:100vw;
+z-index:1;
+box-sizing:border-box;
+}
+
+.home-top{
+position:absolute;
+left:50%;
+top:calc(60px + env(safe-area-inset-top)); /* ✅ respect notch */
+transform:translateX(-50%);
+width:min(760px,92vw);
+font-size:clamp(20px,4.8vw,38px);
+line-height:1;
+color:#fff;
+opacity:0.95;
+}
+
+.home-mid{
+position:absolute;
+left:50%;
+top:74vh;
+transform:translate(-50%,-50%);
+width:min(760px,92vw);
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.home-sub{
+margin:0 0 14px;
+font-size:clamp(16px,3.5vw,22px);
+}
+
+.home-phone{
+  flex-direction:row;
+  gap:0;
+  margin-top:0;
+  width:auto;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:nowrap;
+}
+
+.home .phone-combo{
+  display:flex;
+  align-items:center;
+  width:min(300px,78vw);
+  height:56px;
+
+  border-radius:999px;
+  overflow:visible;
+
+  background:var(--accent);
+  box-shadow:0 12px 28px rgba(0,0,0,0.28);
+
+  position:relative;
+}
+
+.home .phone-combo::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0));
+  opacity:0.35;
+}
+
+.home .iti,
+.home .iti *{
+  font-family:inherit !important;
+}
+
+.home .phone-combo .iti{
+  flex:1;
+  width:auto;
+  max-width:none;
+  box-shadow:none;
+  background:transparent;
+  border-radius:0;
+  height:56px;
+}
+
+.home .phone-combo #phone{
+  flex:1;
+  height:56px;
+  padding:0 18px;
+  font-size:18px;
+  border:none;
+  background:transparent;
+  color:#fff;
+  outline:none;
+  box-sizing:border-box;
+  font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+  font-weight:400;
+}
+
+.home .phone-combo #phone::placeholder{
+  color:rgba(255,255,255,0.75);
+  opacity:1;
+}
+
+.home .phone-combo .home-enter{
+  width:74px;
+  min-width:74px;
+  height:56px;
+  padding:0;
+  border:none;
+  background:rgba(0,0,0,0.10);
+  color:#fff;
+  cursor:pointer;
+  position:relative;
+  font-weight:600;
+
+  font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+  text-transform:none;
+  font-size:18px;
+}
+
+.home .phone-combo .home-enter:hover{
+  background:rgba(0,0,0,0.16);
+}
+
+.home-bottom{
+position:absolute;
+left:50%;
+bottom:calc(74px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
+transform:translateX(-50%);
+width:min(760px,92vw);
+font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+letter-spacing:1px;
+text-transform:none;
+font-size:clamp(16px,3.8vw,28px);
+text-decoration:none;
+opacity:0.9;
+}
+.home-bottom:hover{
+opacity:1;
+text-decoration:underline;
+}
+
+/* PHRASE */
+#screen-phrase{
+position:fixed;
+inset:0;
+width:100vw;
+z-index:2;
+box-sizing:border-box;
+}
+
+.phrase-top{
+position:absolute;
+left:50%;
+top:17vh;
+transform:translateX(-50%) rotate(-14.2deg) skewX(-15deg);
+transform-origin:center;
+width:min(680px,88vw);
+
+margin:0;
+text-align:center;
+color:#FC8983;
+font-weight:600;
+letter-spacing:1px;
+text-transform:none;
+font-size:clamp(18px,4.0vw,28px);
+}
+
+/* ✅ UPDATED: stable horizontal centering + flex to center phrase inside bubble area */
+.phrase-bubble{
+  position:absolute;
+  left:50%;
+  top:13vh;
+  transform:translateX(-50%);
+
+  width:min(900px,96vw);
+  height:clamp(260px, 40vh, 420px);
+
+  background:url('bubble-quotes.svg') no-repeat center;
+  background-size:contain;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:5;
+  pointer-events:none;
+  background-color:transparent;
+  filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+}
+
+/* ✅ UPDATED: single stable nudge (no line-count classes) */
+.phrase-big{
+  font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:none;
+
+  font-size:clamp(38px,7vw,68px);
+  line-height:1.1;
+
+  position:relative;
+  z-index:6;
+
+  margin:0 auto;
+  margin-top:0px;           /* <-- tweak this one value if needed */
+  max-width:75%;
+  text-align:center;
+
+  overflow-wrap:break-word;
+
+  display:block;
+  transform:rotate(-15deg) skewX(-15deg);
+  transform-origin:center;
+}
+
+.phrase-judge{
+position:absolute;
+left:50%;
+top:63vh;
+transform:translateX(-50%);
+width:min(760px,92vw);
+font-weight:600;
+letter-spacing:1px;
+font-size:clamp(18px,4.0vw,28px);
+margin:0;
+color:#FC8983;
+}
+
+.phrase-actions{
+  position:absolute;
+  left:50%;
+  top:calc(63vh + 43px);
+  transform:translateX(-50%);
+  width:min(720px,92vw);
+
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  align-items:center;
+}
+
+.phrase-btn{
+width:min(220px,78vw);
+max-width:280px;
+height:55px;
+border-radius:999px;
+padding:10px 16px;
+
+font-weight:600;
+letter-spacing:1px;
+font-size:clamp(28px,6.2vw,44px);
+text-transform:none;
+
+border:0 !important;
+background:#F90355;
+color:#fff;
+
+position:relative;
+overflow:visible;
+
+display:flex;
+justify-content:center;
+gap:14px;
+align-items:center;
+box-shadow:0 10px 22px rgba(0,0,0,0.22);
+}
+
+.phrase-btn.good{ background:#F90355; }
+.phrase-btn.dark{
+  background:#F90355;
+  margin-top:14px;
+}
+
+.btn-icon{
+  width:64px;
+  height:auto;
+  display:block;
+  position:relative;
+  left:-18px;
+  pointer-events:none;
+}
+.tick-icon{ left:-1px; }
+
+.btn-label{ line-height:1; }
+
+/* REWARD */
+#screen-reward{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  z-index:2;
+  box-sizing:border-box;
+}
+
+.success-wrap{
+  position:absolute;
+  left:50%;
+  top:36vh;
+  transform:translate(-50%,-50%);
+  width:min(760px,92vw);
+  text-align:center;
+  pointer-events:none;
+}
+
+.success-top{
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:clamp(28px,5vw,48px);
+  color:#fff;
+  opacity:0.95;
+  transform:rotate(-14deg) skewX(-15deg);
+  display:inline-block;
+  margin-bottom:18px;
+  position:relative;
+  margin-bottom: 6px;
+  top:0px;
+}
+
+@keyframes successPop{
+  0%{
+    opacity:0;
+    transform:rotate(-14deg) skewX(-15deg) translateY(20px) scale(0.85);
+    filter:blur(6px);
+  }
+  60%{
+    opacity:1;
+    transform:rotate(-14deg) skewX(-15deg) translateY(-6px) scale(1.04);
+    filter:blur(0px);
+  }
+  100%{
+    opacity:1;
+    transform:rotate(-14deg) skewX(-15deg) translateY(0px) scale(1);
+  }
+}
+@keyframes oopsWrong{
+  0%{
+    opacity:0;
+    transform:rotate(-14deg) skewX(-15deg) scale(6) translateZ(0);
+    filter:blur(12px);
+  }
+  60%{
+    opacity:1;
+    transform:rotate(-14deg) skewX(-15deg) scale(0.85);
+    filter:blur(0px);
+  }
+  80%{
+    transform:rotate(-14deg) skewX(-15deg) scale(1.05);
+  }
+  100%{
+    transform:rotate(-14deg) skewX(-15deg) scale(1);
+  }
+}
+@keyframes failSubFade{
+  0%{ opacity:0; }
+  100%{ opacity:1; }
+}
+
+.success-main{
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:clamp(72px,18vw,168px);
+  line-height:1.05;
+  max-width:92vw;
+  color:#FC8983;
+
+  transform:rotate(-14deg) skewX(-15deg);
+  transform-origin:center;
+  display:block;
+  margin:0 auto;
+
+  animation:successPop 700ms ease-out both;
+}
+
+.success-underline{
+  display:block;
+  width:69%;
+  margin:0px auto -2px;
+  transform:none;
+  position:relative;
+  top:-10px;
+}
+
+.success-sub{
+  font-family:'Oswald',sans-serif;
+  font-weight:500;
+  font-size:clamp(20px,4.6vw,34px);
+  line-height:1.15;
+  color:#fff;
+  opacity:0.95;
+  margin-top:calc(10px + 7.5vh);
+}
+
+#screen-reward .timer{ top:60vh; }
+
+.reward-bottom{
+  position:absolute;
+  left:50%;
+  bottom:calc(72px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
+  transform:translateX(-50%);
+  width:min(760px,92vw);
+
+  font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
+  letter-spacing:1px;
+  text-transform:none;
+  font-size:clamp(16px,3.8vw,28px);
+
+  color:#fff;
+  text-decoration:none;
+  opacity:0.95;
+}
+
+/* DESKTOP BLOCKER */
+.desktop-blocker{
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  background:url('desktop-block-background.jpg') center center / cover no-repeat;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 22px;
+  box-sizing:border-box;
+}
+.desktop-box{ width:min(720px,92vw); }
+.desktop-title{
+  font-size:clamp(28px,4vw,46px);
+  margin:0 0 12px;
+  color:#fff;
+  font-weight:700;
+  letter-spacing:0.5px;
+}
+.desktop-sub{
+  font-size:clamp(13px,1.8vw,18px);
+  margin:0;
+  color:#FC8983;
+  font-weight:500;
+  line-height:1.35;
+
+  position:relative;
+  top:-0.5em;
+}
+
+/* QR GATE (CHANGED: bg-blank.jpg) */
+.qr-gate{
+  position:fixed;
+  inset:0;
+  z-index:999998;
+  background:url('bg-blank.jpg') center center / cover no-repeat;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 22px;
+  box-sizing:border-box;
+}
+.qr-box{ width:min(720px,92vw); }
+.qr-title{
+  font-size:clamp(28px,4vw,46px);
+  margin:0 0 12px;
+  color:#fff;
+  font-weight:700;
+  letter-spacing:0.5px;
+}
+.qr-sub{
+  font-size:clamp(13px,1.8vw,18px);
+  margin:0;
+  color:#FC8983;
+  font-weight:500;
+  line-height:1.35;
+  position:relative;
+  top:-0.5em;
+}
+
+.desktop-locations{
+  margin-top:4em;
+}
+.qr-locations{
+  margin-top:4em;
+}
+</style>
+</head>
+
+<body>
+
+<div id='desktopBlocker' class='desktop-blocker'>
+  <div class='desktop-box'>
+    <div class='desktop-title'>LaLah works on mobile only lah.</div>
+    <div class='desktop-sub'>Scan the QR code at participating locations to try it.</div>
+
+    <div class='store-link desktop-locations'>Check out all the LaLah locations</div>
+  </div>
+</div>
+
+<div id='qrGate' class='qr-gate'>
+  <div class='qr-box'>
+    <div class='qr-title'>LaLah is QR-only lah.</div>
+    <div class='qr-sub'>Scan the QR code at participating locations to try it.</div>
+
+    <div class='store-link qr-locations'>Check out all the LaLah locations</div>
+  </div>
+</div>
+
+<div class='wrap'>
+  <div class='card'>
+
+    <!-- PHONE -->
+    <div id='screen-phone' class='home'>
+      <div class='home-top'>SPEAK SINGLISH, GET MORE</div>
+
+      <div class='home-mid'>
+        <div class='sub home-sub'>Select your country and enter your number:</div>
+
+        <div class='phone-area home-phone'>
+          <div class='phone-combo'>
+            <input id='phone' type='tel' placeholder='Visitors only lah' />
+            <button class='home-enter' id='btnEnter'>Go!</button>
+          </div>
+        </div>
+
+        <div class='msg' id='phoneMsg'></div>
+      </div>
+
+      <div class='store-link home-bottom'>Check out all the LaLah locations</div>
+    </div>
+
+    <!-- PHRASE -->
+    <div id='screen-phrase' style='display:none;'>
+      <div class='phrase-top'>Say this to the staff:</div>
+
+      <div class='phrase-bubble'>
+        <p class='phrase-big' id='phraseText'>...</p>
+      </div>
+
+      <div class='phrase-judge'>Staff says</div>
+
+      <div class='phrase-actions'>
+        <button class='btn phrase-btn good' id='btnGood'>
+          <img src='tick.svg' class='btn-icon tick-icon' alt='' />
+          <span class='btn-label'>Good lah</span>
+        </button>
+        <button class='btn phrase-btn dark' id='btnSalah'>
+          <img src='cross.svg' class='btn-icon' alt='' />
+          <span class='btn-label'>Salah</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- FAIL -->
+    <div id='screen-fail' style='display:none;'>
+      <div class='fail-wrap'>
+        <div class='fail-main'>Oops!</div>
+        <div class='fail-sub' id='failBottom'></div>
+        <button class='fail-pill' id='btnRetry'>Try again lah</button>
+      </div>
+    </div>
+
+    <!-- REWARD -->
+    <div id='screen-reward' style='display:none;'>
+      <div class='success-wrap'>
+        <div class='success-top'>Well done!</div>
+
+        <div class='success-main' id='successMain'>
+          You got<br />standard!
+        </div>
+
+        <img src='slash.svg' class='success-underline' alt='' />
+
+        <div class='success-sub'>
+          Grab your reward and enjoy<br />
+          Singapore even more lah.
+        </div>
+      </div>
+
+      <div class='timer' id='timerText'>Valid for: 01:00</div>
+      <div class='msg' id='expireMsg' style='color:#fff;margin-top:14px;'></div>
+      <div class='reward-bottom store-link'>Check out all the LaLah locations</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- STORE MODAL (outside .wrap so it works even when wrap is hidden by gates) -->
+<div id='storeModal' class='store-modal'>
+  <div class='store-modal-content'>
+    <div class='store-close' id='closeStores'>✕</div>
+    <h2>Participating Stores</h2>
+    <div class='store-modal-sub'>Rewards are decided by each store.</div>
+
+    <div class='store-item'>
+      <strong>Ah Seng Kopi Stall</strong><br />
+      Chinatown • Hawker
+    </div>
+
+    <div class='store-item'>
+      <strong>Shiok Burger</strong><br />
+      Tanjong Pagar • Café
+    </div>
+
+    <div class='store-item'>
+      <strong>Lah Bar</strong><br />
+      Kampong Glam • Bar
+    </div>
+  </div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js'></script>
+
+<script>
+(() => {
+  'use strict';
+
+  // ---------- CONFIG ----------
+  const DEV_LOC = 'dev';
+  const DESKTOP_BREAKPOINT = 900;
+  const RECENT_BLOCK = 5;
+  const REWARD_SECONDS = 60;
+
+  // ---------- DOM ----------
+  const desktopBlocker = document.getElementById('desktopBlocker');
+  const qrGate = document.getElementById('qrGate');
+  const wrap = document.querySelector('.wrap');
+
+  const screenPhone = document.getElementById('screen-phone');
+  const screenPhrase = document.getElementById('screen-phrase');
+  const screenReward = document.getElementById('screen-reward');
+  const successMain = document.getElementById('successMain');
+  const screenFail = document.getElementById('screen-fail');
+
+  const phoneInput = document.getElementById('phone');
+  const phoneMsg = document.getElementById('phoneMsg');
+  const btnEnter = document.getElementById('btnEnter');
+
+  const phraseText = document.getElementById('phraseText');
+  const btnGood = document.getElementById('btnGood');
+  const btnSalah = document.getElementById('btnSalah');
+  const btnRetry = document.getElementById('btnRetry');
+
+  const timerText = document.getElementById('timerText');
+  const expireMsg = document.getElementById('expireMsg'); // (kept for future use)
+  const failBottom = document.getElementById('failBottom');
+
+  const storeModal = document.getElementById('storeModal');
+  const closeStores = document.getElementById('closeStores');
+  const storeLinks = document.querySelectorAll('.store-link');
+
+  if(!wrap || !screenPhone || !screenPhrase || !screenReward || !screenFail){
+    console.error('LaLah: missing core DOM nodes.');
+    return;
+  }
+
+  // ---------- HELPERS ----------
+  const qs = () => new URLSearchParams(window.location.search);
+  const getLoc = () => (qs().get('loc') || '').trim().toLowerCase();
+  const isDev = () => getLoc() === DEV_LOC;
+
+  const isDesktopLike = () => {
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const wideScreen = window.innerWidth >= DESKTOP_BREAKPOINT;
+    return finePointer || wideScreen;
+  };
+
+  const show = el => { if(el) el.style.display = 'block'; };
+  const hide = el => { if(el) el.style.display = 'none'; };
+
+  const setBg = which => {
+    if(which === 'light') document.body.style.backgroundImage = 'url(\'bg-light.jpg\')';
+    else if(which === 'dark') document.body.style.backgroundImage = 'url(\'bg-dark.jpg\')';
+    else document.body.style.backgroundImage = 'url(\'bg-blank.jpg\')';
+  };
+
+  // ---------- GATES (single source of truth) ----------
+  const applyGates = () => {
+    const desktop = isDesktopLike();
+    const dev = isDev() || qs().get('test') === '1';
+
+    // Desktop blocker: desktop AND not dev
+    if(desktop && !dev){
+      if(desktopBlocker) desktopBlocker.style.display = 'flex';
+      if(qrGate) qrGate.style.display = 'none';
+      wrap.style.display = 'none';
+      return;
+    }
+
+    // QR gate: mobile AND not dev
+    if(!desktop && !dev){
+      if(desktopBlocker) desktopBlocker.style.display = 'none';
+      if(qrGate) qrGate.style.display = 'flex';
+      wrap.style.display = 'none';
+      return;
+    }
+
+    // Allowed: dev (any device)
+    if(desktopBlocker) desktopBlocker.style.display = 'none';
+    if(qrGate) qrGate.style.display = 'none';
+    wrap.style.display = '';
+  };
+
+  let gateRaf = 0;
+  const scheduleGates = () => {
+    if(gateRaf) cancelAnimationFrame(gateRaf);
+    gateRaf = requestAnimationFrame(() => {
+      gateRaf = 0;
+      applyGates();
+    });
+  };
+
+  window.addEventListener('load', scheduleGates);
+  window.addEventListener('resize', scheduleGates);
+  window.addEventListener('orientationchange', scheduleGates);
+
+  // ---------- DATA ----------
+const PHRASES = [
+  'Steady lah, got standard',
+  'Hosei liao',
+  'Queue until like this, must be good eh',
+  'Can tapao or not ah?',
+  'Wah lao today very hot sia',
+  'Uncle kopi-c siew dai',
+  'Kuah simi kuah?',
+  'Wah this one damn shiok',
+  'Alamak why like that',
+  'This one power lah',
+  'Auntie give chance can or not',
+  'Eh don\'t play play',
+  'Confirm plus chop',
+  'Die die must try',
+  'Wah this one next level sia',
+  'Sibei solid',
+  'Can lah can lah',
+  'Jialat already',
+  'Chope first ah',
+  'Walao eh don\'t bluff me',
+  'Paiseh ah first time',
+  'Kopi-c siew dai can or cannot',
+  'Don\'t so kiasu lah',
+  'Wah I blur like sotong already'
+];
+
+const FAIL_BOTTOM_LINES = [
+  'Well done.<br>You invented new Singlish.<br>But wrong mission, lor.',
+  'Nice attempt!<br>But no, lor.',
+  'Wah, creative sia.<br>But no.',
+  'Effort can.<br>Result cannot.',
+  'You committed fully.<br>To the wrong delivery.',
+  'Great effort.<br>You created a remix of Singlish.<br>But original version only, please.'
+];
+
+const SUCCESS_LINES = [
+  'You got<br>standard',
+
+  'Singlish<br>mastered',
+
+  'Standard<br>achieved',
+
+  'Mission<br>steady',
+
+  'Just like<br>a local',
+
+  'Shiok<br>confirmed',
+
+  'Local<br>approved'
+];
+
+const PHRASE_BREAKS = {
+  'Steady lah, got standard': 'Steady lah,<br>got standard',
+
+  'Queue until like this, must be good eh':
+    'Queue until<br>like this, must<br>be good eh',
+
+  'Wah lao today very hot sia':
+    'Wah lao today<br>very hot sia',
+
+  'Auntie give chance can or not':
+    'Auntie give chance<br>can or not',
+
+  'Kopi-c siew dai can or cannot':
+    'Kopi-c siew dai<br>can or cannot',
+
+  'Wah this one next level sia':
+    'Wah this one<br>next level sia',
+
+  'Paiseh ah first time':
+    'Paiseh ah<br>first time',
+
+  'Wah I blur like sotong already':
+    'Wah I blur like<br>sotong already',
+
+  'Walao eh don\'t bluff me':
+    'Walao eh<br>don\'t bluff me',
+
+  'Can tapao or not ah?':
+    'Can tapao<br>or not ah?',
+
+  'Uncle kopi-c siew dai':
+    'Uncle kopi-c<br>siew dai',
+
+  'Confirm plus chop':
+    'Confirm<br>plus chop',
+
+  'This one power lah':
+    'This one<br>power lah',
+
+  'Wah this one damn shiok':
+     'Wah this one<br>damn shiok',
+
+  'Alamak why like that':
+    'Alamak why<br>like that'
+};
+
+
+
+  // ---------- STORE MODAL ----------
+  storeLinks.forEach(el => el.addEventListener('click', () => {
+    if(storeModal) storeModal.style.display = 'flex';
+  }));
+  if(closeStores) closeStores.addEventListener('click', () => { if(storeModal) storeModal.style.display = 'none'; });
+  if(storeModal) storeModal.addEventListener('click', e => { if(e.target === storeModal) storeModal.style.display = 'none'; });
+
+  // ---------- intl-tel-input ----------
+  const iti = window.intlTelInput(phoneInput, {
+    separateDialCode: true,
+    initialCountry: 'us',
+    preferredCountries: ['us'],
+    nationalMode: true,
+    autoPlaceholder: 'off',
+    formatOnDisplay: false
+  });
+  iti.setCountry('us');
+
+  // ---------- STATE ----------
+let currentPhrase = '';
+const recentPhrases = [];
+
+let currentFailLine = '';
+const recentFailLines = [];
+
+  let rewardTimer = null;
+  let secondsLeft = 0;
+
+  // typing control
+  let typer = null;
+  let typeDelay = null;
+  let currentDisplayText = '';
+
+  const cancelTyping = () => {
+    if(typer){ clearInterval(typer); typer = null; }
+    if(typeDelay){ clearTimeout(typeDelay); typeDelay = null; }
+  };
+
+  // ---------- NAV ----------
+  const gotoPhone = () => {
+    cancelTyping();
+    hide(screenPhrase); hide(screenReward); hide(screenFail);
+    show(screenPhone);
+    stopTimer();
+    setBg('light');
+  };
+
+  const gotoPhrase = () => {
+    cancelTyping();
+    hide(screenPhone); hide(screenReward); hide(screenFail);
+    show(screenPhrase);
+    stopTimer();
+    setNewPhrase();
+    setBg('blank');
+  };
+
+  const gotoReward = () => {
+  cancelTyping();
+  hide(screenPhone); hide(screenPhrase); hide(screenFail);
+  show(screenReward);
+  setBg('blank');
+
+  let next;
+  do {
+    next = SUCCESS_LINES[Math.floor(Math.random() * SUCCESS_LINES.length)];
+  } while (next === successMain.innerHTML);
+
+  successMain.innerHTML = next;
+};
+
+  const gotoFail = () => {
+    cancelTyping();
+    hide(screenPhone); hide(screenPhrase); hide(screenReward);
+    show(screenFail);
+    setBg('blank');
+    if(failBottom){
+
+  let next = currentFailLine;
+
+  do{
+    next = FAIL_BOTTOM_LINES[Math.floor(Math.random() * FAIL_BOTTOM_LINES.length)];
+  } while(recentFailLines.includes(next) || next === currentFailLine);
+
+  currentFailLine = next;
+
+  recentFailLines.push(currentFailLine);
+  if(recentFailLines.length > RECENT_BLOCK) recentFailLines.shift();
+
+  failBottom.innerHTML = currentFailLine;
+}
+  };
+
+  // ---------- PHRASES ----------
+  const setNewPhrase = () => {
+    let next = currentPhrase;
+
+    do{
+      next = PHRASES[Math.floor(Math.random() * PHRASES.length)];
+    } while(recentPhrases.includes(next) || next === currentPhrase);
+
+    currentPhrase = next;
+
+    recentPhrases.push(currentPhrase);
+    if(recentPhrases.length > RECENT_BLOCK) recentPhrases.shift();
+
+    const displayText = PHRASE_BREAKS[currentPhrase] || currentPhrase;
+    currentDisplayText = displayText;
+
+    cancelTyping();
+    phraseText.innerHTML = '';
+   // determine number of lines based on how the text WRAPS (not <br>)
+phraseText.classList.remove('lines-1','lines-2','lines-3','lines-4');
+
+// measure using a hidden clone with the same text + typography
+const bubbleW = phraseText.parentElement.getBoundingClientRect().width;
+const measure = document.createElement('div');
+
+measure.style.position = 'absolute';
+measure.style.left = '-9999px';
+measure.style.top = '0';
+measure.style.visibility = 'hidden';
+measure.style.pointerEvents = 'none';
+
+const cs = window.getComputedStyle(phraseText);
+measure.style.fontFamily = cs.fontFamily;
+measure.style.fontSize = cs.fontSize;
+measure.style.fontWeight = cs.fontWeight;
+measure.style.letterSpacing = cs.letterSpacing;
+measure.style.lineHeight = cs.lineHeight;
+measure.style.textTransform = cs.textTransform;
+measure.style.whiteSpace = 'normal';
+measure.style.wordBreak = 'normal';
+measure.style.overflowWrap = cs.overflowWrap || 'break-word';
+
+// mimic max-width:75% inside the bubble
+measure.style.width = (bubbleW * 0.75) + 'px';
+
+measure.innerHTML = displayText;
+document.body.appendChild(measure);
+
+const lh = parseFloat(window.getComputedStyle(measure).lineHeight);
+const h = measure.getBoundingClientRect().height;
+
+document.body.removeChild(measure);
+
+let lineCount = 1;
+if (lh && h) lineCount = Math.round(h / lh);
+
+lineCount = Math.max(1, Math.min(4, lineCount));
+phraseText.classList.add('lines-' + lineCount);
+
+    let i = 0;
+
+    typeDelay = setTimeout(() => {
+      typeDelay = null;
+
+      const cleanLen = displayText.replace(/<br>/g, '').length;
+      const base = 1000;
+      const duration = Math.max(base, cleanLen * 40);
+      const intervalTime = duration / Math.max(cleanLen, 1);
+
+      typer = setInterval(() => {
+        // if user left phrase screen mid-type, hard stop
+        if(screenPhrase.style.display === 'none'){
+          cancelTyping();
+          return;
+        }
+
+        if(displayText.substr(i, 4) === '<br>'){
+          phraseText.innerHTML += '<br>';
+          i += 4;
+        }else{
+          phraseText.innerHTML += displayText[i] || '';
+          i++;
+        }
+
+        if(i >= displayText.length){
+          cancelTyping();
+        }
+      }, intervalTime);
+    }, 1000);
+  };
+
+  // ---------- VALIDATION ----------
+  const enterApp = () => {
+    const dial = iti.getSelectedCountryData().dialCode;
+    const rawValue = phoneInput.value || '';
+    const num = rawValue.replace(/\D/g, '');
+
+    if(dial === '65'){
+      phoneMsg.textContent = 'Eh you local? This app only for tourists lah.';
+      return;
+    }
+
+    if(/[a-zA-Z]/.test(rawValue)){
+      phoneMsg.textContent = 'Letters cannot lah.';
+      return;
+    }
+
+    if(num.length <= 6){
+      phoneMsg.textContent = 'Too short lah.';
+      return;
+    }
+
+    if(num.length >= 10){
+      phoneMsg.textContent = 'Too long lah.';
+      return;
+    }
+
+    if(/^(\d)\1+$/.test(num)){
+      phoneMsg.textContent = 'Wah all same number ah?';
+      return;
+    }
+
+    let asc = true;
+    let desc = true;
+
+    for(let i=1;i<num.length;i++){
+      const prev = Number(num[i-1]);
+      const cur  = Number(num[i]);
+      if(cur !== prev + 1) asc = false;
+      if(cur !== prev - 1) desc = false;
+    }
+
+    if(asc || desc){
+      phoneMsg.textContent = 'Too obvious lah.';
+      return;
+    }
+
+    gotoPhrase();
+  };
+
+  // ---------- TIMER ----------
+  const updateTimer = () => {
+    const m = Math.floor(secondsLeft/60);
+    const s = secondsLeft%60;
+    timerText.textContent = `Valid for: ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  };
+
+  const stopTimer = () => {
+    if(rewardTimer){
+      clearInterval(rewardTimer);
+      rewardTimer = null;
+    }
+  };
+
+  const startTimer = t => {
+    stopTimer();
+    secondsLeft = t;
+    updateTimer();
+    rewardTimer = setInterval(() => {
+      secondsLeft--;
+      updateTimer();
+      if(secondsLeft <= 0){
+        stopTimer();
+        gotoPhone();
+      }
+    }, 1000);
+  };
+
+  // ---------- EVENTS ----------
+  btnEnter.addEventListener('click', enterApp);
+  phoneInput.addEventListener('keydown', e => { if(e.key === 'Enter') enterApp(); });
+
+  btnSalah.addEventListener('click', gotoFail);
+  btnRetry.addEventListener('click', gotoPhrase);
+
+  btnGood.addEventListener('click', () => {
+    if(window.confetti){
+      confetti({
+        particleCount: 100,
+        spread: 75,
+        startVelocity: 40,
+        origin: { y: 0.6 },
+        colors: ['#ff2d55', '#ffffff', '#ff6b81']
+      });
+    }
+    gotoReward();
+    startTimer(REWARD_SECONDS);
+  });
+
+  // ---------- BOOT ----------
+  scheduleGates();  // enforce gates immediately
+  gotoPhone();
+})();
+</script>
+</body>
+</html>
