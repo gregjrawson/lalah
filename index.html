@@ -316,7 +316,7 @@ font-size:18px;
 .fail-wrap{
   position:absolute;
   left:50%;
-  top:52vh;
+  top:44vh;
   transform:translate(-50%,-50%);
   width:min(760px,92vw);
   text-align:center;
@@ -938,7 +938,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 <div id='screen-local' style='display:none;'>
   <div class='fail-wrap'>
     <div class='fail-main'>Local detected!</div>
-    <div class='fail-sub'>Cannot liddat</div>
+    <div class='fail-sub'>Don't play play lah</div>
   </div>
 </div>
 
@@ -992,6 +992,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 </div>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js' defer></script>
 <script src='https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js'></script>
 
 <script>
@@ -1223,7 +1224,8 @@ const PHRASE_BREAKS = {
     preferredCountries: ['us'],
     nationalMode: true,
     autoPlaceholder: 'off',
-    formatOnDisplay: false
+    formatOnDisplay: false,
+    utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js',
   });
   iti.setCountry('us');
 
@@ -1402,55 +1404,69 @@ phraseText.classList.add('lines-' + lineCount);
     }, 1000);
   };
 
-  // ---------- VALIDATION ----------
-  const enterApp = () => {
-    const dial = iti.getSelectedCountryData().dialCode;
-    const rawValue = phoneInput.value || '';
-    const num = rawValue.replace(/\D/g, '');
+   // ---------- VALIDATION ----------
+const enterApp = () => {
+  const dial = iti.getSelectedCountryData().dialCode;
+  const rawValue = (phoneInput.value || '').trim();
+  const num = rawValue.replace(/\D/g, '');
 
-    if(dial === '65'){z
-      phoneMsg.textContent = '';
-      gotoLocalBlock();
-      return;
-    }
+  // locals blocked hard
+  if(dial === '65'){
+    phoneMsg.textContent = '';
+    gotoLocalBlock();
+    return;
+  }
 
-    if(/[a-zA-Z]/.test(rawValue)){
-      phoneMsg.textContent = 'Letters cannot lah.';
-      return;
-    }
+  // one generic message (don’t teach people how to game it)
+  const fail = () => { phoneMsg.textContent = 'Invalid number lah.'; };
 
-    if(num.length <= 6){
-      phoneMsg.textContent = 'Too short lah.';
-      return;
-    }
+  // basic sanity (stops random smash / empty / letters / ultra-short)
+  if(!rawValue) return fail();
+  if(/[a-zA-Z]/.test(rawValue)) return fail();
+  if(num.length < 7 || num.length > 15) return fail();
 
-    if(num.length >= 10){
-      phoneMsg.textContent = 'Too long lah.';
-      return;
-    }
+  // real per-country validation ONLY if utils.js is actually loaded
+  const hasUtils = (typeof window.intlTelInputUtils !== 'undefined');
+  if(hasUtils){
+    if(!iti.isValidNumber()) return fail();
+  }
 
-    if(/^(\d)\1+$/.test(num)){
-      phoneMsg.textContent = 'Wah all same number ah?';
-      return;
-    }
+  // obvious fakes:
+  // all same digit
+  if(/^(\d)\1+$/.test(num)) return fail();
 
-    let asc = true;
-    let desc = true;
+  // ends with common fake tails
+  if(/0000$/.test(num) || /1234$/.test(num) || /5555$/.test(num)) return fail();
 
-    for(let i=1;i<num.length;i++){
-      const prev = Number(num[i-1]);
-      const cur  = Number(num[i]);
-      if(cur !== prev + 1) asc = false;
-      if(cur !== prev - 1) desc = false;
-    }
-
-    if(asc || desc){
-      phoneMsg.textContent = 'Too obvious lah.';
-      return;
-    }
-
-    gotoPhrase();
+  // repeating chunk patterns (e.g. 121212, 123123, 777888)
+  const isRepeatOf = (s, size) => {
+    if(s.length % size !== 0) return false;
+    const chunk = s.slice(0, size);
+    const reps = s.length / size;
+    if(reps < 2) return false;
+    return chunk.repeat(reps) === s;
   };
+  if(isRepeatOf(num, 2) || isRepeatOf(num, 3) || isRepeatOf(num, 4)) return fail();
+
+  // too many of the same digit overall (e.g. 1112345)
+  const counts = {};
+  for(const ch of num) counts[ch] = (counts[ch] || 0) + 1;
+  if(Math.max(...Object.values(counts)) >= Math.max(5, Math.ceil(num.length * 0.6))) return fail();
+
+  // straight ascending/descending
+  let asc = true, desc = true;
+  for(let i=1;i<num.length;i++){
+    const prev = Number(num[i-1]);
+    const cur  = Number(num[i]);
+    if(cur !== prev + 1) asc = false;
+    if(cur !== prev - 1) desc = false;
+  }
+  if(asc || desc) return fail();
+
+  // passed
+  phoneMsg.textContent = '';
+  gotoPhrase();
+};
 
   // ---------- TIMER ----------
   const updateTimer = () => {
