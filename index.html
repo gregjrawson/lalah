@@ -10,11 +10,6 @@
 <link rel='preconnect' href='https://fonts.googleapis.com' />
 <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
 <link href='https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap' rel='stylesheet' />
-<link rel="preload" as="image" href="bg-light.jpg">
-<link rel="preload" as="image" href="bg-dark.jpg">
-<link rel="preload" as="image" href="bg-blank.jpg">
-<link rel="preload" as="image" href="bubble-quotes.svg">
-<link rel="preload" as="image" href="desktop-block-background.jpg">
 
 <style>
 :root{
@@ -43,37 +38,15 @@ min-height:100svh;
 
 body{
 margin:0;
-background:#000;
-position:relative;
-overflow-x:hidden;
+background-color:var(--bg);
+background-image:url('bg-light.jpg');
+background-size:cover;
+background-position:center top;
+background-repeat:no-repeat;
 color:var(--text);
 font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
 text-align:center;
 }
-/* --- BG LAYERS (no-flash crossfade) --- */
-body::before,
-body::after{
-  content:'';
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  background-size:cover;
-  background-position:center top;
-  background-repeat:no-repeat;
-  opacity:0;
-  transition:opacity 180ms linear;
-  transform:translateZ(0);
-}
-
-/* layer A */
-body::before{ background-image:url('bg-light.jpg'); }
-
-/* layer B */
-body::after{ background-image:url('bg-dark.jpg'); }
-
-body.bg-light::before{ opacity:1; }
-body.bg-dark::after{ opacity:1; }
-/* blank = both 0 so background stays black */
 
 /* force Oswald everywhere (inputs/buttons don't always inherit) */
 html, body, input, button, textarea, select{
@@ -782,7 +755,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
   margin-top:calc(10px + 7.5vh);
 }
 
-#screen-reward .timer{ top:65vh; }
+#screen-reward .timer{ top:60vh; }
 
 .reward-bottom{
   position:absolute;
@@ -1056,17 +1029,11 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
   const show = el => { if(el) el.style.display = 'block'; };
   const hide = el => { if(el) el.style.display = 'none'; };
 
-const setBg = which => {
-  document.body.classList.remove('bg-light','bg-dark');
-
-  if(which === 'light'){
-    document.body.classList.add('bg-light');
-  }
-  else if(which === 'dark'){
-    document.body.classList.add('bg-dark');
-  }
-  // 'blank' = no class (stays black)
-};
+  const setBg = which => {
+    if(which === 'light') document.body.style.backgroundImage = 'url(\'bg-light.jpg\')';
+    else if(which === 'dark') document.body.style.backgroundImage = 'url(\'bg-dark.jpg\')';
+    else document.body.style.backgroundImage = 'url(\'bg-blank.jpg\')';
+  };
 
   // ---------- GATES (single source of truth) ----------
 const applyGates = () => {
@@ -1208,7 +1175,6 @@ const PHRASE_BREAKS = {
   'Alamak why like that':
     'Alamak why<br>like that'
 };
-
 
 
   // ---------- STORE MODAL ----------
@@ -1499,3 +1465,4 @@ phraseText.classList.add('lines-' + lineCount);
 </script>
 </body>
 </html>
+
