@@ -767,8 +767,10 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 }
 
 #screen-reward .timer{
-  top:auto;
-  bottom:calc(210px + env(safe-area-inset-bottom));
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:18vh;
 }
 
 .reward-bottom{
@@ -1135,7 +1137,7 @@ const FAIL_BOTTOM_LINES = [
   'Wah, creative sia.<br>But no.',
   'Effort can.<br>Result cannot.',
   'You committed fully.<br>To the wrong delivery.',
-  'Great effort.<br>You created a remix of Singlish.<br>But original version only, please.'
+  'Great effort.<br>You created a remix of Singlish.<br>But original version only, lah.'
 ];
 
 const SUCCESS_LINES = [
