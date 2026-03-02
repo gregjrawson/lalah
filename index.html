@@ -394,7 +394,7 @@ opacity:0.95;
 .home-mid{
 position:absolute;
 left:50%;
-top:74vh;
+top:55vh;
 transform:translate(-50%,-50%);
 width:min(760px,92vw);
 display:flex;
@@ -403,8 +403,10 @@ align-items:center;
 }
 
 .home-sub{
-margin:0 0 14px;
-font-size:clamp(16px,3.5vw,22px);
+  margin:0 0 8px;
+  font-size:clamp(14px,3.2vw,20px);
+  font-weight:500;
+  letter-spacing:1px;
 }
 
 .home-phone{
@@ -500,13 +502,13 @@ font-size:clamp(16px,3.5vw,22px);
 .home-bottom{
 position:absolute;
 left:50%;
-bottom:calc(74px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
+bottom:calc(64px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
 transform:translateX(-50%);
 width:min(760px,92vw);
 font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
 letter-spacing:1px;
 text-transform:none;
-font-size:clamp(16px,3.8vw,28px);
+font-size:clamp(14px,3.2vw,22px);
 text-decoration:none;
 opacity:0.9;
 }
@@ -776,7 +778,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 .reward-bottom{
   position:absolute;
   left:50%;
-  bottom:calc(72px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
+  bottom:calc(104px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
   transform:translateX(-50%);
   width:min(760px,92vw);
 
@@ -859,12 +861,62 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 .qr-locations{
   margin-top:4em;
 }
+
+/* MINI FOOTER */
+.mini-footer{
+  position:fixed;
+  left:50%;
+  pointer-events:auto;
+  bottom:calc(36px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  width:min(760px,92vw);
+  text-align:center;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.5px;
+  z-index:50;
+  color:#bdbdbd;
+  opacity:0.85;
+}
+
+.mini-footer a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.mini-footer a:hover{
+  text-decoration:underline;
+}
+
+.mini-footer .dot{
+  margin:0 8px;
+  opacity:0.6;
+}
+
+@keyframes footerFade{
+  from{
+    opacity:0;
+    transform:translateX(-50%) translateY(6px);
+  }
+  to{
+    opacity:0.85;
+    transform:translateX(-50%) translateY(0);
+  }
+}
+
 </style>
 </head>
 
 <body>
 
 <div id='desktopBlocker' class='desktop-blocker'>
+  <div class='mini-footer'>
+  <a href='#' id='aboutLinkDesktop'>About LahLah</a>
+  <span class='dot'>·</span>
+  <a href='https://mail.google.com/mail/?view=cm&fs=1&to=hellolahlah@gmail.com' target='_blank'>Contact</a>
+  <span class='dot'>·</span>
+  <span class='origin'>Created in Singapore</span>
+</div>
   <div class='desktop-box'>
     <div class='desktop-title'>LaLah works on mobile only lah.</div>
     <div class='desktop-sub'>Scan the QR code at participating locations to try it.</div>
@@ -969,6 +1021,15 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
   </div>
 </div>
 
+<!-- MINI FOOTER -->
+<div class='mini-footer'>
+  <a href='#' id='aboutLink'>About LahLah</a>
+  <span class='dot'>·</span>
+  <a href='https://mail.google.com/mail/?view=cm&fs=1&to=hellolahlah@gmail.com' target='_blank'>Contact</a>
+  <span class='dot'>·</span>
+  <span class='origin'>Created in Singapore</span>
+</div>
+
 <!-- STORE MODAL (outside .wrap so it works even when wrap is hidden by gates) -->
 <div id='storeModal' class='store-modal'>
   <div class='store-modal-content'>
@@ -989,6 +1050,17 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
     <div class='store-item'>
       <strong>Lah Bar</strong><br />
       Kampong Glam • Bar
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT MODAL -->
+<div id='aboutModal' class='store-modal'>
+  <div class='store-modal-content'>
+    <div class='store-close' id='closeAbout'>✕</div>
+    <h2>About LahLah</h2>
+    <div class='store-modal-sub'>
+      LahLah encourages visitors to engage more deeply with Singapore’s culture. By lowering social barriers, it creates opportunities for more natural and meaningful local interaction.
     </div>
   </div>
 </div>
@@ -1222,6 +1294,39 @@ const PHRASE_BREAKS = {
   storeLinks.forEach(el => el.addEventListener('click', () => {
     if(storeModal) storeModal.style.display = 'flex';
   }));
+  // ---------- ABOUT MODAL ----------
+const aboutLink = document.getElementById('aboutLink');
+const aboutLinkDesktop = document.getElementById('aboutLinkDesktop');
+const aboutModal = document.getElementById('aboutModal');
+const closeAbout = document.getElementById('closeAbout');
+
+if(aboutLink){
+  aboutLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    if(aboutModal) aboutModal.style.display = 'flex';
+  });
+}
+
+if(aboutLinkDesktop){
+  aboutLinkDesktop.addEventListener('click', (e) => {
+    e.preventDefault();
+    if(aboutModal) aboutModal.style.display = 'flex';
+  });
+}
+
+if(closeAbout){
+  closeAbout.addEventListener('click', () => {
+    if(aboutModal) aboutModal.style.display = 'none';
+  });
+}
+
+if(aboutModal){
+  aboutModal.addEventListener('click', (e) => {
+    if(e.target === aboutModal){
+      aboutModal.style.display = 'none';
+    }
+  });
+}
   if(closeStores) closeStores.addEventListener('click', () => { if(storeModal) storeModal.style.display = 'none'; });
   if(storeModal) storeModal.addEventListener('click', e => { if(e.target === storeModal) storeModal.style.display = 'none'; });
 
