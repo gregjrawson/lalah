@@ -608,7 +608,7 @@ font-size:clamp(19.5px,4.3vw,30px);
 .phrase-judge{
 position:absolute;
 left:50%;
-top:63vh;
+top:54.5vh;
 transform:translateX(-50%);
 width:min(760px,92vw);
 font-weight:600;
@@ -616,12 +616,13 @@ letter-spacing:1px;
 font-size:clamp(19.5px,4.3vw,30px);
 margin:0;
 color:#FC8983;
+z-index:20;
 }
 
 .phrase-actions{
   position:absolute;
   left:50%;
-  top:calc(63vh + 43px);
+  top:calc(63vh - 39px);
   transform:translateX(-50%);
   width:min(720px,92vw);
 
@@ -953,7 +954,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 
     <!-- PHONE -->
     <div id='screen-phone' class='home'>
-      <div class='home-top'>SPEAK SINGLISH, GET MORE</div>
+      <div class='home-top' id='homeTitle'></div>
 
       <div class='home-mid'>
         <div class='sub home-sub'>Select your country and enter your number:</div>
@@ -1104,6 +1105,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
   const successMain = document.getElementById('successMain');
   const screenFail = document.getElementById('screen-fail');
   const screenLocal = document.getElementById('screen-local');
+  const homeTitle = document.getElementById('homeTitle');
 
   const phoneInput = document.getElementById('phone');
   const phoneMsg = document.getElementById('phoneMsg');
@@ -1190,6 +1192,8 @@ const applyGates = () => {
   window.addEventListener('orientationchange', scheduleGates);
 
   // ---------- DATA ----------
+  const HOME_TITLE_TEXT = 'SPEAK SINGLISH, GET MORE';
+
 const PHRASES = [
   'Steady lah, got standard',
   'Hosei liao',
@@ -1375,14 +1379,16 @@ const recentFailLines = [];
     if(typeDelay){ clearTimeout(typeDelay); typeDelay = null; }
   };
 
-  // ---------- NAV ----------
-  const gotoPhone = () => {
-    cancelTyping();
-    hide(screenPhrase); hide(screenReward); hide(screenFail);
-    show(screenPhone);
-    stopTimer();
-    setBg('light');
-  };
+// ---------- NAV ----------
+const gotoPhone = () => {
+  cancelTyping();
+  hide(screenPhrase); hide(screenReward); hide(screenFail);
+  show(screenPhone);
+  stopTimer();
+  setBg('light');
+  typeHomeTitle();
+
+};
 
   const gotoPhrase = () => {
     cancelTyping();
@@ -1437,6 +1443,29 @@ const recentFailLines = [];
   hide(screenFail);
   show(screenLocal);
   setBg('blank');
+};
+
+const typeHomeTitle = () => {
+  if (!homeTitle) return;
+
+  homeTitle.innerHTML = '';
+  let i = 0;
+
+  const text = HOME_TITLE_TEXT;
+  const duration = 900;
+  const intervalTime = duration / text.length;
+
+  setTimeout(() => {
+
+    typer = setInterval(() => {
+      homeTitle.innerHTML += text[i] || '';
+      i++;
+      if (i >= text.length) {
+        clearInterval(typer);
+      }
+    }, intervalTime);
+
+  }, 1000); // 1 second pause before typing
 };
 
   // ---------- PHRASES ----------
@@ -1643,9 +1672,10 @@ const enterApp = () => {
     startTimer(REWARD_SECONDS);
   });
 
-  // ---------- BOOT ----------
-  scheduleGates();  // enforce gates immediately
-  gotoPhone();
+// ---------- BOOT ----------
+scheduleGates();  // enforce gates immediately
+gotoPhone();
+
 })();
 </script>
 </body>
