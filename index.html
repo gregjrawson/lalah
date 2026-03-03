@@ -444,6 +444,21 @@ align-items:center;
   border-radius:inherit;
 }
 
+/* lalah: make the country dropdown arrow visible on the red sausage */
+.home .phone-combo .iti__arrow{
+  border-left: 5px solid transparent !important;
+  border-right: 5px solid transparent !important;
+  border-top: 7px solid #fff !important;
+  opacity: 1 !important;
+}
+
+/* when dropdown is open, the arrow flips (uses border-bottom) */
+.home .phone-combo .iti__arrow.iti__arrow--up{
+  border-top: 0 !important;
+  border-bottom: 7px solid #fff !important;
+  opacity: 1 !important;
+}
+
 .home .iti,
 .home .iti *{
   font-family:inherit !important;
@@ -529,7 +544,7 @@ box-sizing:border-box;
 .phrase-top{
 position:absolute;
 left:50%;
-top:calc(16.7vh - 4px);
+top:calc(10.4vh - 4px);
 transform:translateX(-50%) rotate(-14.2deg) skewX(-15deg);
 transform-origin:center;
 width:min(680px,88vw);
@@ -540,20 +555,21 @@ color:#FC8983;
 font-weight:600;
 letter-spacing:1px;
 text-transform:none;
-font-size:clamp(18px,4.0vw,28px);
+font-size:clamp(19.5px,4.3vw,30px);
 }
 
 /* ✅ UPDATED: stable horizontal centering + flex to center phrase inside bubble area */
 .phrase-bubble{
   position:absolute;
   left:50%;
-  top:13vh;
+  top:9.8vh;
   transform:translateX(-50%);
 
-  width:min(900px,96vw);
-  height:clamp(260px, 40vh, 420px);
+  width:128vw;
+  aspect-ratio: 760 / 430;
+  height:auto;
 
-  background:url('bubble-quotes.svg') no-repeat center;
+  background:url('purple-bubble.svg') no-repeat center;
   background-size:contain;
 
   display:flex;
@@ -562,8 +578,6 @@ font-size:clamp(18px,4.0vw,28px);
 
   z-index:5;
   pointer-events:none;
-  background-color:transparent;
-  filter: drop-shadow(0 0 0 rgba(0,0,0,0));
 }
 
 /* ✅ UPDATED: single stable nudge (no line-count classes) */
@@ -599,7 +613,7 @@ transform:translateX(-50%);
 width:min(760px,92vw);
 font-weight:600;
 letter-spacing:1px;
-font-size:clamp(18px,4.0vw,28px);
+font-size:clamp(19.5px,4.3vw,30px);
 margin:0;
 color:#FC8983;
 }
@@ -965,7 +979,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
         <p class='phrase-big' id='phraseText'>...</p>
       </div>
 
-      <div class='phrase-judge'>Staff says</div>
+      <div class='phrase-judge'>Staff says:</div>
 
       <div class='phrase-actions'>
         <button class='btn phrase-btn good' id='btnGood'>
@@ -1129,7 +1143,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 
   const setBg = which => {
     if(which === 'light') document.body.style.backgroundImage = 'url(\'bg-light.jpg\')';
-    else if(which === 'dark') document.body.style.backgroundImage = 'url(\'bg-dark.jpg\')';
+    else if(which === 'dark') document.body.style.backgroundImage = 'url(\'bg-blank.jpg\')';
     else document.body.style.backgroundImage = 'url(\'bg-blank.jpg\')';
   };
 
