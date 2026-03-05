@@ -412,14 +412,22 @@ align-items:center;
   letter-spacing:1px;
 }
 
+.phone-note{
+  margin-top:6px;
+  font-size:clamp(11px,2.6vw,14px);
+  color:#bdbdbd;
+  max-width:320px;
+  line-height:1.35;
+  text-align:center;
+}
+
 .home-phone{
-  flex-direction:row;
-  gap:0;
+  flex-direction:column;
+  gap:8px;
   margin-top:0;
   width:auto;
   justify-content:center;
   align-items:center;
-  flex-wrap:nowrap;
 }
 
 .home .phone-combo{
@@ -967,6 +975,11 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
             <input id='phone' type='tel' placeholder='Visitors only lah' />
             <button class='home-enter' id='btnEnter'>Go!</button>
           </div>
+
+          <div class='phone-note'>
+          Your number is used only to verify you’re an international visitor.<br>
+          We don’t store phone numbers.
+</div>
         </div>
 
         <div class='msg' id='phoneMsg'></div>
