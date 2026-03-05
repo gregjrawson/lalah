@@ -8,20 +8,20 @@
   const RECENT_BLOCK = 5;
   const REWARD_SECONDS = 60;
 
-  // ✅ PASS/FAIL logger (pings Apps Script)
-  const RESULT_WEBAPP = 'https://script.google.com/macros/s/AKfycbzz3yGeLl-BAdWdLwU_gFwsQ9qKCT1tXtoxvcZUaqWybju8HONDdd9yzeltZbhVKt2N/exec';
+    // ✅ Google Script endpoint (PASS/FAIL ping)
+  const SCRIPT_PING_BASE = 'https://script.google.com/macros/s/AKfycbzz3yGeLl-BAdWdLwU_gFwsQ9qKCT1tXtoxvcZUaqWybju8HONDdd9yzeltZbhVKt2N/exec';
 
-  const sendResult = (result) => {
-    const loc = (new URLSearchParams(window.location.search).get('loc') || '').trim();
+  const pingResult = (result) => {
+    const loc = getLoc();
     if (!loc) return;
 
-    // image ping = safest (no CORS issues, never blocks UI)
+    // fire-and-forget GET (works reliably on mobile)
     const img = new Image();
     img.src =
-      RESULT_WEBAPP
-      + '?loc=' + encodeURIComponent(loc)
-      + '&result=' + encodeURIComponent(result)
-      + '&v=' + Date.now();
+      SCRIPT_PING_BASE +
+      '?loc=' + encodeURIComponent(loc) +
+      '&result=' + encodeURIComponent(result) +
+      '&t=' + Date.now();
   };
 
   // ---------- DOM ----------
@@ -521,28 +521,29 @@
 
   // ✅ FAIL = Salah button
   btnSalah.addEventListener('click', () => {
-    sendResult('FAIL');
-    gotoFail();
-  });
+  pingResult('FAIL');
+  gotoFail();
+});
 
   btnRetry.addEventListener('click', gotoPhrase);
 
   // ✅ PASS = Good lah button
   btnGood.addEventListener('click', () => {
-    sendResult('PASS');
+  pingResult('PASS');
 
-    if(window.confetti){
-      confetti({
-        particleCount: 100,
-        spread: 75,
-        startVelocity: 40,
-        origin: { y: 0.6 },
-        colors: ['#ff2d55', '#ffffff', '#ff6b81']
-      });
-    }
-    gotoReward();
-    startTimer(REWARD_SECONDS);
-  });
+  if(window.confetti){
+    confetti({
+      particleCount: 100,
+      spread: 75,
+      startVelocity: 40,
+      origin: { y: 0.6 },
+      colors: ['#ff2d55', '#ffffff', '#ff6b81']
+    });
+  }
+
+  gotoReward();
+  startTimer(REWARD_SECONDS);
+});
 
   // ---------- BOOT ----------
   scheduleGates();
