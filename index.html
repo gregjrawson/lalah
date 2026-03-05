@@ -1672,12 +1672,18 @@ const enterApp = () => {
   btnEnter.addEventListener('click', enterApp);
   phoneInput.addEventListener('keydown', e => { if(e.key === 'Enter') enterApp(); });
 
-  btnSalah.addEventListener('click', gotoFail);
+  btnSalah.addEventListener('click', () => {
+  new Image().src =
+    'https://script.google.com/macros/s/AKfycbzz3yGeLl-BAdWdLwU_gFwsQ9qKCT1tXtoxvcZUaqWybju8HONDdd9yzeltZbhVKt2N/exec?loc=' +
+    encodeURIComponent(new URLSearchParams(window.location.search).get('loc') || '') +
+    '&result=FAIL&t=' + Date.now();
+  gotoFail();
+});
   btnRetry.addEventListener('click', gotoPhrase);
 
   btnGood.addEventListener('click', () => {
     new Image().src = 'https://script.google.com/macros/s/AKfycbzz3yGeLl-BAdWdLwU_gFwsQ9qKCT1tXtoxvcZUaqWybju8HONDdd9yzeltZbhVKt2N/exec?loc=' + encodeURIComponent(new URLSearchParams(window.location.search).get('loc') || '') + '&result=PASS&t=' + Date.now();
-    
+
     if(window.confetti){
       confetti({
         particleCount: 100,
