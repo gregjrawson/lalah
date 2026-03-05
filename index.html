@@ -1096,6 +1096,13 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 
 <script>
 (() => {
+    // ---------- SCAN PING (logs QR scan in Google Sheets) ----------
+  const loc = (new URLSearchParams(window.location.search).get('loc') || '').trim();
+  if (loc) {
+    new Image().src =
+      'https://script.google.com/macros/s/AKfycbzz3yGeLl-BAdWdLwU_gFwsQ9qKCT1tXtoxvcZUaqWybju8HONDdd9yzeltZbhVKt2N/exec?loc=' +
+      encodeURIComponent(loc);
+  }
   'use strict';
 
   // ---------- CONFIG ----------
