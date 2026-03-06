@@ -319,7 +319,7 @@ font-size:18px;
 .fail-wrap{
   position:absolute;
   left:50%;
-  top:44vh;
+  top:40vh;
   transform:translate(-50%,-50%);
   width:min(760px,92vw);
   text-align:center;
@@ -354,12 +354,13 @@ font-size:18px;
   animation:failSubFade 800ms ease-out 1100ms forwards;
   display:inline-block;
   transform:rotate(-14deg) skewX(-15deg);
+  min-height:5.6em;
 }
 
 .fail-pill{
-  margin-top:150px;
+  margin-top:102px;
   width:min(240px,78vw);
-  height:60px;
+  height:80px;
   border-radius:20px;
   border:0;
   background:#F90355;
@@ -619,7 +620,7 @@ font-size:clamp(19.5px,4.3vw,30px);
 .phrase-judge{
 position:absolute;
 left:50%;
-top:52.1vh;
+top:55.2vh;
 transform:translateX(-50%);
 width:min(760px,92vw);
 font-weight:600;
@@ -633,27 +634,27 @@ z-index:20;
 .phrase-actions{
   position:absolute;
   left:50%;
-  top:calc(63vh - 39px);
+  top:calc(63vh - 20px);
   transform:translateX(-50%);
   width:min(720px,92vw);
 
   display:flex;
-  flex-direction:column;
-  gap:14px;
+  flex-direction:row;
+  gap:30px;
   align-items:center;
+  justify-content:center;
 }
 
 .phrase-btn{
-width:180px;
-width:180px;
+width:120px;
+min-width:0;
 padding:10px 14px;
-max-width:280px;
-height:38px;
-border-radius:10px;
+height:80px;
+border-radius:24px;
 
 font-weight:600;
 letter-spacing:1px;
-font-size:clamp(20px,4.3vw,30px);
+font-size:clamp(24px,5.2vw,36px);
 text-transform:none;
 
 border:0 !important;
@@ -673,22 +674,34 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 .phrase-btn.good{ background:#F90355; }
 .phrase-btn.dark{
   background:#F90355;
-  margin-top:14px;
 }
 
 .btn-icon{
-  width:45px;
+  position:absolute;
+  width:32px;
   height:auto;
-  display:block;
-  position:relative;
-  left:-18px;
   pointer-events:none;
 }
-.tick-icon{ left:-1px; }
+.tick-icon{
+  top:-6px;
+  left:-6px;
+}
+
+.cross-icon{
+  top:-6px;
+  right:-6px;
+}
 
 .btn-label{
-  line-height:1;
-  white-space:nowrap;
+line-height:1;
+white-space:nowrap;
+flex:1;
+text-align:center;
+padding-left:3px;
+}
+
+.salah-text{
+  color:#000;
 }
 
 /* REWARD */
@@ -1008,8 +1021,8 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
           <span class='btn-label'>Good lah</span>
         </button>
         <button class='btn phrase-btn dark' id='btnSalah'>
-          <img src='cross.svg' class='btn-icon' alt='' />
-          <span class='btn-label'>Salah</span>
+          <img src='cross.svg' class='btn-icon cross-icon' alt='' />
+          <span class='btn-label salah-text'>Salah</span>
         </button>
       </div>
     </div>
