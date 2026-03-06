@@ -644,15 +644,16 @@ z-index:20;
 }
 
 .phrase-btn{
-width:min(220px,78vw);
+width:180px;
+width:180px;
+padding:10px 14px;
 max-width:280px;
-height:55px;
-border-radius:20px;
-padding:10px 16px;
+height:38px;
+border-radius:10px;
 
 font-weight:600;
 letter-spacing:1px;
-font-size:clamp(28px,6.2vw,44px);
+font-size:clamp(20px,4.3vw,30px);
 text-transform:none;
 
 border:0 !important;
@@ -664,7 +665,7 @@ overflow:visible;
 
 display:flex;
 justify-content:center;
-gap:14px;
+gap:6px;
 align-items:center;
 box-shadow:0 10px 22px rgba(0,0,0,0.22);
 }
@@ -676,7 +677,7 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 }
 
 .btn-icon{
-  width:64px;
+  width:45px;
   height:auto;
   display:block;
   position:relative;
@@ -685,7 +686,10 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 }
 .tick-icon{ left:-1px; }
 
-.btn-label{ line-height:1; }
+.btn-label{
+  line-height:1;
+  white-space:nowrap;
+}
 
 /* REWARD */
 #screen-reward{
@@ -1248,7 +1252,8 @@ const PHRASES = [
   'Paiseh ah first time',
   'Kopi-c siew dai can or cannot',
   'Don\'t so kiasu lah',
-  'Wah I blur like sotong already'
+  'Wah I blur like sotong already',
+  'Win liao lor'
 ];
 
 const FAIL_BOTTOM_LINES = [
@@ -1273,7 +1278,9 @@ const SUCCESS_LINES = [
 
   'Shiok<br>confirmed',
 
-  'Local<br>approved'
+  'Local<br>approved',
+
+  'Swee lah!'
 ];
 
 const PHRASE_BREAKS = {
