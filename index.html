@@ -835,6 +835,25 @@ padding-left:3px;
   opacity:0.95;
 }
 
+.share-btn{
+  margin-top:18px;
+  padding:12px 22px;
+  height:56px;
+  border-radius:18px;
+  border:0;
+  background:#F90355;
+  color:#fff;
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:clamp(16px,3.5vw,22px);
+  cursor:pointer;
+  box-shadow:0 10px 22px rgba(0,0,0,0.22);
+}
+
+.share-btn:hover{
+  opacity:0.92;
+}
+
 /* DESKTOP BLOCKER */
 .desktop-blocker{
   position:fixed;
@@ -1059,6 +1078,9 @@ padding-left:3px;
           Grab your reward and enjoy<br />
           Singapore even more lah.
         </div>
+
+        <button class='share-btn' id='btnShare' type='button'>Share it lah</button>
+
       </div>
 
       <div class='timer' id='timerText'>Valid for: 01:00</div>
@@ -1164,6 +1186,7 @@ padding-left:3px;
   const btnRetry = document.getElementById('btnRetry');
 
   const timerText = document.getElementById('timerText');
+  const btnShare = document.getElementById('btnShare');
   const expireMsg = document.getElementById('expireMsg'); // (kept for future use)
   const failBottom = document.getElementById('failBottom');
 
@@ -1702,6 +1725,20 @@ const enterApp = () => {
   };
 
   // ---------- EVENTS ----------
+  if(btnShare){
+  btnShare.addEventListener('click', async () => {
+    if(navigator.share){
+      try{
+        await navigator.share({
+          title: 'I got standard lah!',
+          text: 'Just spoke Singlish to a local in Singapore. Not bad lah.',
+          url: 'https://lalah.sg'
+        });
+      }catch(err){
+      }
+    }
+  });
+}
   btnEnter.addEventListener('click', enterApp);
   phoneInput.addEventListener('keydown', e => { if(e.key === 'Enter') enterApp(); });
 
