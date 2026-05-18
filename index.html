@@ -109,11 +109,11 @@ border:2px solid #fff;
 }
 
 .msg{
-margin-top:14px;
+margin-top:6px;
 min-height:22px;
 font-size:16px;
 font-weight:800;
-color:#ff3b30;
+color:#fff;
 }
 
 .phone-area{
@@ -210,16 +210,16 @@ justify-content:center;
 }
 
 .store-modal-content h2{
-text-align:center;
+text-align:left;
 margin-top:0;
 margin-bottom:4px;
 }
 
 .store-modal-sub{
-text-align:left;
+text-align:center;
 margin:0 0 24px;
 color:#FC8983;
-font-size:14px;
+font-size:16px;
 }
 
 .store-modal-sub p{
@@ -398,7 +398,7 @@ opacity:0.95;
 .home-mid{
 position:absolute;
 left:50%;
-top:calc(55vh + 56px);
+top:calc(55vh + 100px);
 transform:translate(-50%,-50%);
 width:min(760px,92vw);
 display:flex;
@@ -414,7 +414,7 @@ align-items:center;
 }
 
 .phone-note{
-  margin-top:6px;
+  margin-top:1px;
   font-size:clamp(11px,2.6vw,14px);
   color:#bdbdbd;
   max-width:320px;
@@ -529,7 +529,7 @@ align-items:center;
 .home-bottom{
 position:absolute;
 left:50%;
-bottom:calc(64px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
+bottom:calc(60px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
 transform:translateX(-50%);
 width:min(760px,92vw);
 font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
@@ -821,7 +821,7 @@ padding-left:3px;
 .reward-bottom{
   position:absolute;
   left:50%;
-  bottom:calc(64px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
+  bottom:calc(60px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
   transform:translateX(-50%);
   width:min(760px,92vw);
 
@@ -985,7 +985,6 @@ padding-left:3px;
       <div class='home-top' id='homeTitle'></div>
 
       <div class='home-mid'>
-        <div class='sub home-sub'>Select your country and enter your number:</div>
 
         <div class='phone-area home-phone'>
           <div class='phone-combo'>
@@ -1084,7 +1083,9 @@ padding-left:3px;
   <div class='store-modal-content'>
     <div class='store-close' id='closeStores'>✕</div>
     <h2>Participating Stores</h2>
-    <div class='store-modal-sub'>Rewards are decided by each store.</div>
+    <div class='store-modal-sub'>Rewards are decided by each store. <br>
+      Expect a little something waiting for you — <br>
+      find out when you get there lah.</div>
 
     <div class='store-item'>
       <strong>Ah Seng Kopi Stall</strong><br />
