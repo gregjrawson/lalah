@@ -37,6 +37,7 @@
 /* ✅ iOS Safari viewport fix */
 html,body{
   height:100%;
+  background-color:#e6d9bf;
   background-image:url('bg-light.jpg');
   background-size:cover;
   background-position:center center;
@@ -51,7 +52,7 @@ min-height:100svh;
 
 body{
 margin:0;
-background-color:#fff;
+background-color:#e6d9bf;
 background-image:url('bg-light.jpg');
 background-size:cover;
 background-position:center center;
@@ -420,7 +421,6 @@ animation:failSubFade 1400ms ease-out 1100ms forwards;
 position:fixed;
 inset:0;
 width:100vw;
-height:100dvh;
 z-index:1;
 box-sizing:border-box;
 background-image:url('bg-light.jpg');
@@ -1281,10 +1281,10 @@ preloadImages.forEach(src => {
   img.src = src;
 });
   const setBg = which => {
-    if(which === 'light') document.body.style.backgroundImage = 'url(\'bg-light.jpg\')';
-    else if(which === 'dark') document.body.style.backgroundImage = 'url(\'bg-blank.jpg\')';
-    else document.body.style.backgroundImage = 'url(\'bg-blank.jpg\')';
-  };
+  const img = (which === 'light') ? "url('bg-light.jpg')" : "url('bg-blank.jpg')";
+  document.body.style.backgroundImage = img;
+  document.documentElement.style.backgroundImage = img;
+};
 
   // ---------- GATES (single source of truth) ----------
 const applyGates = () => {
