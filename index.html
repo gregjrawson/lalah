@@ -35,16 +35,9 @@
 }
 
 /* ✅ iOS Safari viewport fix */
-html,body{
-  height:100%;
-  background-image:url('bg-light.jpg');
-  background-size:cover;
-  background-position:center top;
-  background-repeat:no-repeat;
-}
-
+html,body{height:100%;}
 body{
-  min-height:100svh;
+min-height:100svh;
 }
 @supports (height: 100dvh){
   body{ min-height:100dvh; }
@@ -588,7 +581,7 @@ transform:scaleX(1.25);
 .locations-hotspot{
   position:absolute;
   left:76%;
-  top:79%;
+  top:76%;
   width:34%;
   height:7%;
   z-index:20;
