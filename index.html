@@ -3,7 +3,7 @@
 <head>
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-<title>LaLah</title>
+<title>can or not</title>
 
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css' />
 
@@ -128,7 +128,7 @@ flex-wrap:wrap;
 
 /* input wrapper (default, other screens) */
 .iti{
-width:min(480px,92vw);
+width:100%;
 max-width:480px;
 border-radius:16px;
 background:var(--panel);
@@ -146,7 +146,7 @@ padding:14px 14px;
 font-size:18px;
 border:none;
 background:transparent;
-color:var(--text);
+color:#111;
 outline:none;
 box-sizing:border-box;
 font-family:'Oswald',sans-serif;
@@ -158,7 +158,7 @@ border-radius:12px 0 0 12px;
 }
 
 .iti__selected-dial-code{
-color:var(--text);
+color:#111;
 font-weight:700;
 }
 
@@ -187,7 +187,7 @@ text-decoration:underline;
 display:none;
 position:fixed;
 inset:0;
-background:linear-gradient(180deg,rgba(0,0,0,0.75),rgba(0,0,0,0.92));
+background:rgba(0,0,0,0.5);
 backdrop-filter:blur(6px);
 z-index:1000001;
 align-items:center;
@@ -199,32 +199,54 @@ justify-content:center;
   padding:36px 28px;
   border-radius:28px;
 
-  background:url('bg-blank.jpg') no-repeat center bottom;
+  background:transparent;
   background-size:cover;
 
-  box-shadow:0 35px 90px rgba(0,0,0,0.55);
-
-  text-align:left;
-  max-height:80vh;
+  text-align:center;
+  height:80vh;
   overflow-y:auto;
   position:relative;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  box-sizing:border-box;
 }
 
 .store-modal-content h2{
 text-align:center;
 margin-top:0;
-margin-bottom:4px;
+margin-bottom:24px;
+font-size:24px;
+color:#FC8983;
+}
+
+.about-logo{
+  width:180px;
+  height:auto;
+  margin:0 auto 24px;
+  display:block;
+}
+
+.store-logo{
+  width:180px;
+  height:auto;
+  margin:0 auto 12px;
+  display:block;
+  position:relative;
+top:-20px;
 }
 
 .store-modal-sub{
 text-align:center;
-margin:0 0 24px;
-color:#FC8983;
-font-size:16px;
+width:min(500px,90%);
+margin:0 auto 20px;
+color:#fff;
+font-size:14px;
 }
 
 .store-modal-sub p{
-margin:6px 0;
+margin:2px 0;
 }
 
 .store-item{
@@ -239,6 +261,7 @@ margin:6px 0;
 
 .store-item strong{
   font-weight:600;
+  color:#FC8983;
 }
 
 .store-item{
@@ -275,12 +298,12 @@ font-size:18px;
   transform:translateX(-50%);
 
   font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
-  font-size:clamp(14px,2.5vw,18px);
-  font-weight:500;
-  letter-spacing:1px;
+  font-size:clamp(12.6px,2.25vw,16.2px);
+  font-weight:600;
+  letter-spacing:-0/7px;
 
-  color:#FC8983;
-  opacity:0.85;
+  color:#F90355;
+  opacity:1;
 }
 
 /* ✅ make full-screen screens use iOS-safe viewport */
@@ -320,7 +343,7 @@ font-size:18px;
 .fail-wrap{
   position:absolute;
   left:50%;
-  top:40vh;
+  top:calc(40vh + 100px);
   transform:translate(-50%,-50%);
   width:min(760px,92vw);
   text-align:center;
@@ -331,45 +354,50 @@ font-size:18px;
 }
 
 .fail-main{
-  font-family:'Oswald',sans-serif;
-  font-weight:600;
-  font-size:clamp(96px,19vw,192px);
-  line-height:1.05;
+  font-family:'Brushfire',sans-serif;
+  font-weight:500;
+  letter-spacing:1px;
+  font-size:clamp(140px,28vw,230px);
+  line-height:0.8;
   color:#000;
   margin-bottom:-6px;
   animation:oopsWrong 1040ms cubic-bezier(.2,.9,.25,1.2) both;
 
-  transform:rotate(-14deg) skewX(-15deg);
+  transform:rotate(-7.5deg) skewX(-7.5deg);
   transform-origin:center;
   display:block;
 }
 
 .fail-sub{
-  margin-top:0.9em;
+  margin-top:1.4em;
   font-family:'Oswald',sans-serif;
   font-weight:600;
-  font-size:clamp(28px,6vw,60px);
-  line-height:1.4;
-  color:#FC8983;
+  letter-spacing:-0.7px;
+  font-size:clamp(19.5px,4.3vw,30px);
+  line-height:1.2
+  ;
+  color:#F90355;
   opacity:0;
-  animation:failSubFade 800ms ease-out 1100ms forwards;
+  animation:failSubFade 1400ms ease-out 1100ms forwards;
   display:inline-block;
-  transform:rotate(-14deg) skewX(-15deg);
+  transform:none;
   min-height:5.6em;
 }
 
 .fail-pill{
   margin-top:102px;
-  width:min(240px,78vw);
-  height:80px;
-  border-radius:20px;
+  width:100px;
+height:100px;
+border-radius:50%;
   border:0;
   background:#F90355;
   color:#fff;
   font-family:'Oswald',sans-serif;
+  opacity:0;
+animation:failSubFade 1400ms ease-out 1100ms forwards;
   font-weight:600;
-  font-size:clamp(26px,6vw,44px);
-  letter-spacing:1px;
+  font-size:clamp(21.6px,4.68vw,32.4px);
+  letter-spacing:0px;
   cursor:pointer;
   box-shadow:0 10px 22px rgba(0,0,0,0.22);
 }
@@ -399,7 +427,7 @@ opacity:0.95;
 .home-mid{
 position:absolute;
 left:50%;
-top:calc(55vh + 100px);
+top:73vh;
 transform:translate(-50%,-50%);
 width:min(760px,92vw);
 display:flex;
@@ -414,11 +442,19 @@ align-items:center;
   letter-spacing:1px;
 }
 
+.phone-label{
+  margin-bottom:2px;
+  font-size:12px;
+  font-weight:600;
+  color:#111;
+  text-align:center;
+}
+
 .phone-note{
-  margin-top:1px;
+  margin-top:0px;
   font-size:clamp(11px,2.6vw,14px);
-  color:#bdbdbd;
-  max-width:320px;
+  color:#555;
+  max-width:250px;
   line-height:1.35;
   text-align:center;
 }
@@ -435,13 +471,13 @@ align-items:center;
 .home .phone-combo{
   display:flex;
   align-items:center;
-  width:min(300px,78vw);
+  width:min(250px,78vw);
   height:56px;
 
-  border-radius:20px;
+  border-radius:28px;
   overflow:hidden;
 
-  background:var(--accent);
+  background:#fff;
   box-shadow:0 12px 28px rgba(0,0,0,0.28);
 
   position:relative;
@@ -453,11 +489,11 @@ align-items:center;
   inset:0;
   pointer-events:none;
   background:linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0));
-  opacity:0.35;
+  opacity:0;
   border-radius:inherit;
 }
 
-/* lalah: make the country dropdown arrow visible on the red sausage */
+/* can or not: make the country dropdown arrow visible on the red sausage */
 .home .phone-combo .iti__arrow{
   border-left: 5px solid transparent !important;
   border-right: 5px solid transparent !important;
@@ -490,11 +526,11 @@ align-items:center;
 .home .phone-combo #phone{
   flex:1;
   height:56px;
-  padding-left: calc(18px + 0.6ch);
+  padding-left: calc(10px + 0.6ch);
   font-size:18px;
   border:none;
   background:transparent;
-  color:#fff;
+  color:#111;
   outline:none;
   box-sizing:border-box;
   font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
@@ -507,12 +543,14 @@ align-items:center;
 }
 
 .home .phone-combo .home-enter{
-  width:74px;
-  min-width:74px;
-  height:56px;
+  width:46px;
+  min-width:46px;
+  height:46px;
   padding:0;
+  margin-right:6px;
   border:none;
-  background:rgba(0,0,0,0.10);
+  border-radius:50%;
+  background:#F90355;
   color:#fff;
   cursor:pointer;
   position:relative;
@@ -520,29 +558,27 @@ align-items:center;
 
   font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
   text-transform:none;
-  font-size:18px;
+  font-size:22px;
 }
 
 .home .phone-combo .home-enter:hover{
   background:rgba(0,0,0,0.16);
 }
 
-.home-bottom{
-position:absolute;
-left:50%;
-bottom:calc(20px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
-transform:translateX(-50%);
-width:min(760px,92vw);
-font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
-letter-spacing:1px;
-text-transform:none;
-font-size:clamp(14px,3.2vw,22px);
-text-decoration:none;
-opacity:0.9;
+.home .phone-combo .home-enter span{
+
+display:inline-block;
+transform:scaleX(1.25);
 }
-.home-bottom:hover{
-opacity:1;
-text-decoration:underline;
+
+.locations-hotspot{
+  position:absolute;
+  left:76%;
+  top:79%;
+  width:34%;
+  height:7%;
+  z-index:20;
+  cursor:pointer;
 }
 
 /* PHRASE */
@@ -550,23 +586,23 @@ text-decoration:underline;
 position:fixed;
 inset:0;
 width:100vw;
-z-index:2;
+z-index:999999;
 box-sizing:border-box;
 }
 
 .phrase-top{
 position:absolute;
 left:50%;
-top:calc(10.4vh - 4px);
-transform:translateX(-50%) rotate(-14.2deg) skewX(-15deg);
+top:calc(10.4vh + 86px);
+transform:translateX(-50%);
 transform-origin:center;
 width:min(680px,88vw);
 
 margin:0;
 text-align:center;
-color:#FC8983;
+color:#F90355;
 font-weight:600;
-letter-spacing:1px;
+letter-spacing:-0.7px;
 text-transform:none;
 font-size:clamp(19.5px,4.3vw,30px);
 }
@@ -582,11 +618,11 @@ font-size:clamp(19.5px,4.3vw,30px);
   aspect-ratio: 760 / 430;
   height:auto;
 
-  background:url('purple-bubble.svg') no-repeat center;
+  background:none;
   background-size:contain;
 
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:center;
 
   z-index:5;
@@ -595,67 +631,68 @@ font-size:clamp(19.5px,4.3vw,30px);
 
 /* ✅ UPDATED: single stable nudge (no line-count classes) */
 .phrase-big{
-  font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
-  font-weight:600;
+  font-family:'Brushfire',sans-serif;
+  font-weight:500;
   letter-spacing:1px;
   text-transform:none;
+  color:#000;
 
-  font-size:clamp(38px,7vw,68px);
-  line-height:1.1;
+ font-size:clamp(73.5px,14.04vw,118.8px);
+  line-height:0.8;
 
   position:relative;
   z-index:6;
 
   margin:0 auto;
-  margin-top:0px;           /* <-- tweak this one value if needed */
-  max-width:75%;
+  margin-top:155px;           /* <-- tweak this one value if needed */
+  max-width:60%;
   text-align:center;
 
   overflow-wrap:break-word;
 
   display:block;
-  transform:rotate(-15deg) skewX(-15deg);
+  transform:rotate(-7.5deg) skewX(-7.5deg);
   transform-origin:center;
 }
 
 .phrase-judge{
 position:absolute;
 left:50%;
-top:55.2vh;
+top:calc(55.2vh + 50px);
 transform:translateX(-50%);
 width:min(760px,92vw);
 font-weight:600;
-letter-spacing:1px;
+letter-spacing:-0.3px;
 font-size:clamp(19.5px,4.3vw,30px);
 margin:0;
-color:#FC8983;
+color:#F90355;
 z-index:20;
 }
 
 .phrase-actions{
   position:absolute;
   left:50%;
-  top:calc(63vh - 20px);
+  top:calc(63vh + 30px);
   transform:translateX(-50%);
   width:min(720px,92vw);
 
   display:flex;
   flex-direction:row;
-  gap:30px;
+  gap: 40px;px;
   align-items:center;
   justify-content:center;
 }
 
 .phrase-btn{
-width:120px;
-min-width:0;
-padding:10px 14px;
-height:80px;
-border-radius:24px;
+width:100px;
+min-width:100px;
+padding:0;
+height:100px;
+border-radius:50%;
 
 font-weight:600;
-letter-spacing:1px;
-font-size:clamp(24px,5.2vw,36px);
+letter-spacing:0px;
+font-size:clamp(21.6px,4.68vw,32.4px);
 text-transform:none;
 
 border:0 !important;
@@ -674,7 +711,8 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
 
 .phrase-btn.good{ background:#F90355; }
 .phrase-btn.dark{
-  background:#F90355;
+  background:#000;
+  color:#fff;
 }
 
 .btn-icon{
@@ -684,13 +722,16 @@ box-shadow:0 10px 22px rgba(0,0,0,0.22);
   pointer-events:none;
 }
 .tick-icon{
-  top:-6px;
-  left:-6px;
+  top:-9px;
+  left:50%;
+  transform:translateX(-50%);
 }
 
 .cross-icon{
-  top:-6px;
-  right:-6px;
+  top:-9px;
+  left:50%;
+  transform:translateX(-50%);
+  filter:none;
 }
 
 .btn-label{
@@ -702,7 +743,7 @@ padding-left:3px;
 }
 
 .salah-text{
-  color:#000;
+  color:#fff;
 }
 
 /* REWARD */
@@ -727,10 +768,11 @@ padding-left:3px;
 .success-top{
   font-family:'Oswald',sans-serif;
   font-weight:600;
-  font-size:clamp(28px,5vw,48px);
-  color:#fff;
-  opacity:0.95;
-  transform:rotate(-14deg) skewX(-15deg);
+  font-size:clamp(19.5px,4.3vw,30px);
+  color:#F90355;
+  opacity:1;
+  letter-spacing:-0.7px;
+  transform:none;
   display:inline-block;
   margin-bottom:18px;
   position:relative;
@@ -741,19 +783,29 @@ padding-left:3px;
 @keyframes successPop{
   0%{
     opacity:0;
-    transform:rotate(-14deg) skewX(-15deg) translateY(20px) scale(0.85);
+    transform:rotate(-7.5deg) skewX(-7.5deg) translateY(20px) scale(0.85);
     filter:blur(6px);
   }
   60%{
     opacity:1;
-    transform:rotate(-14deg) skewX(-15deg) translateY(-6px) scale(1.04);
+    transform:rotate(-7.5deg) skewX(-7.5deg) translateY(-6px) scale(1.04);
     filter:blur(0px);
   }
   100%{
     opacity:1;
-    transform:rotate(-14deg) skewX(-15deg) translateY(0px) scale(1);
+    transform:rotate(-7.5deg) skewX(-7.5deg) translateY(0px) scale(1);
   }
 }
+
+@keyframes slashReveal{
+  from{
+    clip-path:inset(0 100% 0 0);
+  }
+  to{
+    clip-path:inset(0 0 0 0);
+  }
+}
+
 @keyframes oopsWrong{
   0%{
     opacity:0;
@@ -778,14 +830,17 @@ padding-left:3px;
 }
 
 .success-main{
-  font-family:'Oswald',sans-serif;
-  font-weight:600;
-  font-size:clamp(72px,18vw,168px);
-  line-height:1.05;
+  position:relative;
+  top:25px;
+  font-family:'Brushfire',sans-serif;
+  font-weight:500;
+  letter-spacing:1px;
+  font-size:clamp(73.5px,14.04vw,118.8px);
+  line-height:0.8;
   max-width:92vw;
-  color:#FC8983;
+  color:#000;
 
-  transform:rotate(-14deg) skewX(-15deg);
+  transform:rotate(-4deg) skewX(-3deg);
   transform-origin:center;
   display:block;
   margin:0 auto;
@@ -795,45 +850,49 @@ padding-left:3px;
 
 .success-underline{
   display:block;
-  width:69%;
-  margin:0px auto -2px;
-  transform:none;
-  position:relative;
-  top:-10px;
+  width:50%;
+  height:auto;
+  margin:15px auto 20px;
+  clip-path:inset(0 100% 0 0);
+ animation:slashReveal 300ms ease-out forwards;
+animation-delay:600ms;
 }
 
 .success-sub{
   font-family:'Oswald',sans-serif;
-  font-weight:500;
-  font-size:clamp(20px,4.6vw,34px);
-  line-height:1.15;
-  color:#fff;
-  opacity:0.95;
-  margin-top:calc(10px + 1vh);
+  font-weight:600;
+  font-size:clamp(17px,3.7vw,26px);
+  letter-spacing:-0.7px;
+  line-height:1.2;
+  color:#000;
+  opacity:1;
+  margin-top:calc(20px + 1vh);
 }
 
 #screen-reward .timer{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  bottom:18vh;
+  top:calc(53vh + 5px);
+  bottom:auto;
 }
 
 .reward-bottom{
   position:absolute;
   left:50%;
-  bottom:calc(60px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
+  bottom:calc(100px + env(safe-area-inset-bottom)); /* ✅ respect home bar */
   transform:translateX(-50%);
   width:min(760px,92vw);
 
   font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
-  letter-spacing:1px;
+  letter-spacing:-0.7px;
   text-transform:none;
-  font-size:clamp(14px,3.2vw,28px);
+  font-weight:500;
+  font-size:clamp(13px,2.8vw,18px);
 
-  color:#fff;
+  color:#000;
   text-decoration:none;
-  opacity:0.95;
+  opacity:1;
 }
 
 /* DESKTOP BLOCKER */
@@ -911,19 +970,25 @@ padding-left:3px;
   position:fixed;
   left:50%;
   pointer-events:auto;
-  bottom:calc(36px + env(safe-area-inset-bottom));
-  transform:translateX(-50%);
+  bottom:calc(20px + env(safe-area-inset-bottom));
+  transform:translate(-50%,-33px);
   width:min(760px,92vw);
   text-align:center;
-  font-size:10px;
-  font-weight:500;
-  letter-spacing:0.5px;
+  font-size:13px;
+  font-weight:400;
+  letter-spacing:-0.3px;
   z-index:50;
-  color:#bdbdbd;
-  opacity:0.85;
+  color:#F90355;
+  opacity:1;
+}
+
+.mini-footer a:last-of-type{
+  position:relative;
+  top:5px;
 }
 
 .mini-footer a{
+  display:block;
   color:inherit;
   text-decoration:none;
 }
@@ -955,26 +1020,26 @@ padding-left:3px;
 
 <div id='desktopBlocker' class='desktop-blocker'>
   <div class='mini-footer'>
-  <a href='#' id='aboutLinkDesktop'>About lalah</a>
+  <a href='#' id='aboutLinkDesktop'>About can or not</a>
   <span class='dot'>·</span>
   <a href='https://mail.google.com/mail/?view=cm&fs=1&to=hellolahlah@gmail.com' target='_blank'>Contact</a>
   <span class='dot'>·</span>
   <span class='origin'>Created in Singapore</span>
 </div>
   <div class='desktop-box'>
-    <div class='desktop-title'>lalah works on mobile only lah.</div>
+    <div class='desktop-title'>can or not works on mobile only lah.</div>
     <div class='desktop-sub'>Scan the QR code at participating locations to try it.</div>
 
-    <div class='store-link desktop-locations'>Check out all the lalah locations</div>
+    <div class='store-link desktop-locations'>Check out all the can or not locations</div>
   </div>
 </div>
 
 <div id='qrGate' class='qr-gate'>
   <div class='qr-box'>
-    <div class='qr-title'>lalah is QR-only lah.</div>
+    <div class='qr-title'>can or not is QR-only lah.</div>
     <div class='qr-sub'>Scan the QR code at participating locations to try it.</div>
 
-    <div class='store-link qr-locations'>Check out all the lalah locations</div>
+    <div class='store-link qr-locations'>Check out all the can or not locations</div>
   </div>
 </div>
 
@@ -983,26 +1048,26 @@ padding-left:3px;
 
     <!-- PHONE -->
     <div id='screen-phone' class='home'>
-      <div class='home-top' id='homeTitle'></div>
 
       <div class='home-mid'>
 
         <div class='phone-area home-phone'>
+          <div class='phone-label'>Select your country and enter your number</div>
           <div class='phone-combo'>
             <input id='phone' type='tel' placeholder='' />
-            <button class='home-enter' id='btnEnter'>Go!</button>
+            <button class='home-enter' id='btnEnter'><span>➜</span></button>
           </div>
 
           <div class='phone-note'>
-          Your number is used only to verify you’re an international visitor.<br>
+          Your number is used only to verify you’re an international visitor.
           We don’t store phone numbers.
 </div>
-        </div>
-
-        <div class='msg' id='phoneMsg'></div>
+                <div class='msg' id='phoneMsg'></div>
+                </div>
       </div>
 
-      <div class='store-link home-bottom'>Check out all the laLah locations</div>
+      <div class='locations-hotspot store-link' aria-label='Can or Not locations'></div>
+
     </div>
 
     <!-- PHRASE -->
@@ -1032,7 +1097,7 @@ padding-left:3px;
       <div class='fail-wrap'>
         <div class='fail-main'>Oops!</div>
         <div class='fail-sub' id='failBottom'></div>
-        <button class='fail-pill' id='btnRetry'>Try again lah</button>
+        <button class='fail-pill' id='btnRetry'>Try again</button>
       </div>
     </div>
 
@@ -1053,8 +1118,7 @@ padding-left:3px;
           You got<br />standard!
         </div>
 
-        <img src='slash.svg' class='success-underline' alt='' />
-
+        <img src='slash-new.png' class='success-underline' alt='' />
         <div class='success-sub'>
           Grab your reward and enjoy<br />
           Singapore even more lah.
@@ -1063,14 +1127,12 @@ padding-left:3px;
 
       <div class='timer' id='timerText'>Valid for: 01:00</div>
       <div class='msg' id='expireMsg' style='color:#fff;margin-top:14px;'></div>
-      <button id='btnShare' type='button' style='position:absolute; left:50%; transform:translateX(-50%); bottom:22vh; padding:12px 22px; height:56px; border-radius:18px; border:0; background:#F90355; color:#fff; font-family:Oswald,sans-serif; font-weight:600; font-size:clamp(16px,3.5vw,22px); box-shadow:0 10px 22px rgba(0,0,0,0.22); cursor:pointer;'>Share it lah</button>
-      <div class='reward-bottom store-link'>Check out all the LaLah locations</div>
+      <button id='btnShare' type='button' style='position:absolute; left:50%; transform:translateX(-50%); bottom:22vh; padding:0; width:100px; height:100px; border-radius:50%; border:0; background:#F90355; color:#fff; font-family:Oswald,sans-serif; font-weight:600; font-size:clamp(16px,3.5vw,22px); box-shadow:0 10px 22px rgba(0,0,0,0.22); cursor:pointer;'>Share it lah!</button>
+      <div class='reward-bottom store-link'>Check out all the can or not locations</div>
       <div class='mini-footer'>
-  <a href='#' id='aboutLinkReward'>About lalah</a>
-  <span class='dot'>·</span>
+  <a href='#' id='aboutLinkReward'>About can or not</a>
   <a href='https://mail.google.com/mail/?view=cm&fs=1&to=hellolahlah@gmail.com' target='_blank'>Contact</a>
-  <span class='dot'>·</span>
-  <span class='origin'>Created in Singapore</span>
+  
 </div>
     </div>
 
@@ -1081,10 +1143,11 @@ padding-left:3px;
 <div id='storeModal' class='store-modal'>
   <div class='store-modal-content'>
     <div class='store-close' id='closeStores'>✕</div>
-    <h2>Participating Stores</h2>
-    <div class='store-modal-sub'>Rewards are decided by each store. <br>
-      Expect a little something waiting for you — <br>
-      find out when you get there lah.</div>
+    <img src='logo.png' alt='can or not' class='store-logo' />
+<h2>Participating Stores</h2>
+    <div class='store-modal-sub'>Rewards are decided by each store.<br>
+  You'll find out when you get there.<br>
+  Assuming you get the phrase right lah.</div>
 
     <div class='store-item'>
       <strong>Ah Seng Kopi Stall</strong><br />
@@ -1107,18 +1170,15 @@ padding-left:3px;
 <div id='aboutModal' class='store-modal'>
   <div class='store-modal-content'>
     <div class='store-close' id='closeAbout'>✕</div>
-    <h2>About lalah</h2>
+    <img src='logo.png' alt='can or not' class='about-logo' />
 
     <div class='store-modal-sub'>
-      <p>lalah helps you go beyond the surface of Singapore.</p>
+  <p>A way to discover a side of Singapore you might otherwise miss. Try a little Singlish at participating stores. If the staff says good lah, you’ll unlock a small reward.</p>
 
-      <p>Try a Singlish phrase at participating stores.
-      If the staff says good lah, you’ll unlock a small reward. But the real reward is becoming part of Singapore’s local culture.</p>
+  <p>But the real reward is getting a little closer to the Singapore behind the tourist stuff.</p>
 
-      <p>Sometimes the best travel stories start like this.</p>
-    </div>
-
-  </div>
+  <p>Sometimes the best travel stories start like this.</p>
+</div>
 </div>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js'></script>
@@ -1174,7 +1234,7 @@ padding-left:3px;
   const storeLinks = document.querySelectorAll('.store-link');
 
   if(!wrap || !screenPhone || !screenPhrase || !screenReward || !screenFail){
-    console.error('LaLah: missing core DOM nodes.');
+    console.error('can or not: missing core DOM nodes.');
     return;
   }
 
@@ -1302,61 +1362,65 @@ const PHRASE_BREAKS = {
   'Steady lah, got standard': 'Steady lah,<br>got standard',
 
   'Queue until like this, must be good eh':
-    'Queue until<br>like this, must<br>be good eh',
+   'Queue until<br>like this<br>must be<br>good eh',
 
   'Wah lao today very hot sia':
-    'Wah lao today<br>very hot sia',
+    'Wah lao today very hot sia',
 
   'Auntie give chance can or not':
-   'Auntie<br>give chance can<br>or not',
+   'Auntie<br>give chance<br>can or not',
 
   'Kopi-c siew dai can or cannot':
-    'Kopi-c siew dai<br>can or cannot',
+    'Kopi-c siew dai can or cannot',
+
+    'Chope first ah':
+  'Chope<br>first ah',
 
   'Kuah simi kuah?':
-    'Kuah simi<br>kuah?',
+    'Kuah simi kuah?',
 
   'Die die must try':
     'Die die<br>must try',
 
   'Wah this one next level sia':
-    'Wah this one<br>next level sia',
+    'Wah this one next level sia',
 
   'Don\'t so kiasu lah':
-    'Don\'t so<br>kiasu lah',
+    'Don\'t so kiasu lah',
 
   'Can lah can lah':
     'Can lah<br>can lah',
 
   'Paiseh ah first time':
-    'Paiseh ah<br>first time',
+    'Paiseh ah first time',
 
   'Eh don\'t play play':
     'Eh don\'t<br>play play',
 
   'Wah I blur like sotong already':
-    'Wah I blur like<br>sotong already',
+    'Wah I blur like sotong already',
 
   'Walao eh don\'t bluff me':
-    'Walao eh<br>don\'t bluff me',
+    'Walao<br>eh don\'t<br>bluff me',
 
   'Can tapao or not ah?':
     'Can tapao<br>or not ah?',
 
   'Uncle kopi-c siew dai':
-    'Uncle kopi-c<br>siew dai',
+    'Uncle<br>kopi-c<br>siew dai',
 
   'Confirm plus chop':
-    'Confirm<br>plus chop',
+  'Confirm<br>plus chop',
 
   'This one power lah':
-    'This one<br>power lah',
+    'This one power lah',
 
   'Wah this one damn shiok':
-     'Wah this one<br>damn shiok',
+     'Wah<br>this one<br>damn shiok',
 
   'Alamak why like that':
-    'Alamak why<br>like that'
+    'Alamak why like that'
+    
 };
 
   // ---------- STORE MODAL ----------
@@ -1365,12 +1429,20 @@ const PHRASE_BREAKS = {
   }));
   // ---------- ABOUT MODAL ----------
 const aboutLink = document.getElementById('aboutLink');
+const aboutLinkReward = document.getElementById('aboutLinkReward');
 const aboutLinkDesktop = document.getElementById('aboutLinkDesktop');
 const aboutModal = document.getElementById('aboutModal');
 const closeAbout = document.getElementById('closeAbout');
 
 if(aboutLink){
   aboutLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    if(aboutModal) aboutModal.style.display = 'flex';
+  });
+}
+
+if(aboutLinkReward){
+  aboutLinkReward.addEventListener('click', (e) => {
     e.preventDefault();
     if(aboutModal) aboutModal.style.display = 'flex';
   });
@@ -1449,7 +1521,7 @@ const gotoPhone = () => {
     stopTimer();
     setNewPhrase();
     setBg('blank');
-  };
+};
 
   const gotoReward = () => {
   cancelTyping();
@@ -1706,6 +1778,7 @@ const enterApp = () => {
   // ---------- EVENTS ----------
   btnEnter.addEventListener('click', enterApp);
   phoneInput.addEventListener('keydown', e => { if(e.key === 'Enter') enterApp(); });
+  
 
   btnSalah.addEventListener('click', () => {
   new Image().src =
@@ -1754,5 +1827,7 @@ gotoPhone();
 </script>
 </body>
 </html>
+
+
 
 
