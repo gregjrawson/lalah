@@ -3,6 +3,8 @@
 <head>
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width, initial-scale=1.0, viewport-fit=cover' />
+<meta name='theme-color' content='#ffffff' />
+<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 <title>can or not</title>
 
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css' />
@@ -349,8 +351,12 @@ font-size:18px;
 /* FAIL SCREEN */
 #screen-fail{
   position:fixed;
-  inset:0;
+  top:-10vh;
+  bottom:-10vh;
+  left:0;
+  right:0;
   width:100vw;
+  height:120vh;
   z-index:2;
   box-sizing:border-box;
 }
@@ -430,8 +436,12 @@ animation:failSubFade 1400ms ease-out 1100ms forwards;
 /* HOME */
 #screen-phone.home{
 position:fixed;
-inset:0;
+top:-10vh;
+bottom:-10vh;
+left:0;
+right:0;
 width:100vw;
+height:120vh;
 z-index:1;
 box-sizing:border-box;
 }
