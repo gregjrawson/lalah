@@ -43,6 +43,7 @@ html{
 
 body{
   margin:0;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   min-height:100dvh;
   background:none;
   color:var(--text);
@@ -52,7 +53,7 @@ body{
 
 body::before{
   content:'';
-  position:absolute;
+  position:fixed;
   top:0;
   left:0;
   width:100%;
