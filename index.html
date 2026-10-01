@@ -38,15 +38,18 @@
 html{
   height:100%;
   min-height:100dvh;
-  background-color:#e6d9bf;
+  margin:0;
+  padding:0;
 }
 
 #bgLayer{
   position:fixed;
-  inset:0;
-  width:100vw;
-  height:100vh;
-  height:100dvh;
+  top: -10vh;
+  bottom: -10vh;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 120vh;
   background-image:var(--bg-img, url('bg-light.jpg'));
   background-size:cover;
   background-position:center center;
