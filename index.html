@@ -37,6 +37,11 @@
 /* ✅ iOS Safari viewport fix */
 html{
   height:100%;
+  background-color:#e6d9bf;
+  background-image:var(--bg-img, url('bg-light.jpg'));
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
 }
 
 body{
@@ -48,19 +53,6 @@ body{
   text-align:center;
 }
 
-body::before{
-  content:'';
-  position:fixed;
-  top:-100px;
-  left:0;
-  right:0;
-  bottom:-100px;
-  background-image:var(--bg-img, url('bg-light.jpg'));
-  background-size:cover;
-  background-position:center center;
-  background-repeat:no-repeat;
-  z-index:-1;
-}
 
 /* force Oswald everywhere (inputs/buttons don't always inherit) */
 html, body, input, button, textarea, select{
