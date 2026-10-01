@@ -56,18 +56,18 @@ body{
   color: var(--text);
 }
 
-body::before{
-  content:'';
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background-image:var(--bg-img, url('bg-light.jpg'));
-  background-size:cover;
-  background-position:center center;
-  background-repeat:no-repeat;
-  z-index:-1;
+body::before {
+  content: '';
+  position: fixed;
+  top: -100px;
+  bottom: -100px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  background-image: url('bg-light.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 /* force Oswald everywhere (inputs/buttons don't always inherit) */
