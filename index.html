@@ -2,8 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='UTF-8' />
-<meta name='viewport' content='width=device-width, initial-scale=1' />
-<meta name="theme-color" content="#e6d9bf">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, viewport-fit=cover' />
 <title>can or not</title>
 
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css' />
@@ -38,6 +37,10 @@
 /* ✅ iOS Safari viewport fix */
 html{
   background-color:#e6d9bf;
+  background-image:var(--bg-img, url('bg-light.jpg'));
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
   height:100%;
 }
 
@@ -598,7 +601,7 @@ transform:scaleX(1.25);
 
 /* PHRASE */
 #screen-phrase{
-position:absolute;
+position:fixed;
 inset:0;
 width:100vw;
 z-index:999999;
