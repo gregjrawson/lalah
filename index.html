@@ -3,7 +3,6 @@
 <head>
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width, initial-scale=1.0, viewport-fit=cover' />
-<meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="theme-color" content="#e6d9bf" />
 <title>can or not</title>
@@ -39,31 +38,34 @@
 
 /* ✅ iOS Safari viewport fix */
 html{
-  background-color:#e6d9bf;
-  height:100%;
+  background-color: transparent;
+  height: 100%;
 }
 
 body{
-  margin:0;
-  min-height:100dvh;
-  background:none;
-  color:var(--text);
-  font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
-  text-align:center;
+  margin: 0;
+  min-height: 100dvh;
+  background: none;
+  color: var(--text);
+  font-family: 'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Arial, sans-serif;
+  text-align: center;
 }
 
 body::before{
-  content:'';
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background-image:var(--bg-img, url('bg-light.jpg'));
-  background-size:cover;
-  background-position:center center;
-  background-repeat:no-repeat;
-  z-index:-1;
+  content: '';
+  position: fixed;
+  top: -100px;
+  bottom: -100px;
+  left: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+  background-image: var(--bg-img, url('bg-light.jpg'));
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
 }
 
 /* force Oswald everywhere (inputs/buttons don't always inherit) */
