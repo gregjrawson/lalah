@@ -3,8 +3,6 @@
 <head>
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width, initial-scale=1.0, viewport-fit=cover' />
-<meta name='theme-color' content='#ffffff' />
-<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 <title>can or not</title>
 
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css' />
@@ -38,40 +36,32 @@
 
 /* ✅ iOS Safari viewport fix */
 html{
+  background-color:#e6d9bf;
   height:100%;
-  min-height:100dvh;
-  margin:0;
-  padding:0;
-}
-
-#bgLayer{
-  position: fixed;
-  top: -10vh;
-  bottom: -10vh;
-  left: -10vw;
-  right: -10vw;
-  width: 120vw;
-  height: 120vh;
-  background-image: var(--bg-img, url('bg-light.jpg'));
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  z-index: -1;
 }
 
 body{
   margin:0;
-  padding:0;
-  width:100%;
-  min-height:100vh;
   min-height:100dvh;
-  overflow:hidden;
-  background-color:transparent;
+  background:none;
   color:var(--text);
   font-family:'Oswald',-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;
   text-align:center;
 }
 
+body::before{
+  content:'';
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-image:var(--bg-img, url('bg-light.jpg'));
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  z-index:-1;
+}
 
 /* force Oswald everywhere (inputs/buttons don't always inherit) */
 html, body, input, button, textarea, select{
@@ -79,14 +69,12 @@ html, body, input, button, textarea, select{
 }
 
 .wrap{
-  min-height: 100vh;
-  min-height: 100dvh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom) 16px;
-  box-sizing: border-box;
+min-height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:22px 16px;
+box-sizing:border-box;
 }
 
 .card{
@@ -351,12 +339,8 @@ font-size:18px;
 /* FAIL SCREEN */
 #screen-fail{
   position:fixed;
-  top:-10vh;
-  bottom:-10vh;
-  left:0;
-  right:0;
+  inset:0;
   width:100vw;
-  height:120vh;
   z-index:2;
   box-sizing:border-box;
 }
@@ -436,12 +420,8 @@ animation:failSubFade 1400ms ease-out 1100ms forwards;
 /* HOME */
 #screen-phone.home{
 position:fixed;
-top:-10vh;
-bottom:-10vh;
-left:0;
-right:0;
+inset:0;
 width:100vw;
-height:120vh;
 z-index:1;
 box-sizing:border-box;
 }
@@ -1051,7 +1031,6 @@ animation-delay:600ms;
 </head>
 
 <body>
-  <div id='bgLayer'></div>
 
 <div id='desktopBlocker' class='desktop-blocker'>
   <div class='mini-footer'>
