@@ -589,6 +589,17 @@ display:inline-block;
 transform:scaleX(1.25);
 }
 
+.about-hotspot{
+  position:absolute;
+  left:0%;
+  top:60%;
+  width:20%;
+  height:12%;
+  z-index:21;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
 .locations-hotspot{
   position:absolute;
   left:76%;
@@ -1116,6 +1127,7 @@ animation-delay:600ms;
                 </div>
       </div>
 
+      <div class='about-hotspot' id='aboutHotspot' aria-label='What is Can or Not?'></div>
       <div class='locations-hotspot store-link' aria-label='Can or Not locations'></div>
       <div class='bird-hotspot' id='birdHotspot' aria-label='Hear from the bird'></div>
       <div class='bird-panel' id='birdPanel'>
@@ -1511,7 +1523,13 @@ const aboutLink = document.getElementById('aboutLink');
 const aboutLinkReward = document.getElementById('aboutLinkReward');
 const aboutLinkDesktop = document.getElementById('aboutLinkDesktop');
 const aboutModal = document.getElementById('aboutModal');
+const aboutHotspot = document.getElementById('aboutHotspot');
 const closeAbout = document.getElementById('closeAbout');
+if(aboutHotspot){
+  aboutHotspot.addEventListener('click', () => {
+    if(aboutModal) aboutModal.style.display = 'flex';
+  });
+}
 
 if(aboutLink){
   aboutLink.addEventListener('click', (e) => {
