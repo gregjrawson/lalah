@@ -1632,6 +1632,10 @@ const typeHomeTitle = () => {
 
     cancelTyping();
     phraseText.innerHTML = '';
+    phraseText.style.fontSize =
+  currentPhrase === 'Queue until like this, must be good eh'
+    ? 'clamp(66px,12.6vw,107px)'
+    : '';
    // determine number of lines based on how the text WRAPS (not <br>)
 phraseText.classList.remove('lines-1','lines-2','lines-3','lines-4');
 
