@@ -599,6 +599,37 @@ transform:scaleX(1.25);
   cursor:pointer;
 }
 
+.bird-hotspot{
+  position:absolute;
+  left:80%;
+  top:56%;
+  width:20%;
+  height:11%;
+  z-index:21;
+  cursor:pointer;
+}
+
+.bird-panel{
+  display:none;
+  position:absolute;
+  right:8%;
+  top:34%;
+  width:300px;
+  z-index:30;
+}
+
+.bird-panel img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.bird-panel-text{
+  color:#000;
+  font-size:16px;
+  font-weight:600;
+  line-height:1.2;
+}
 /* PHRASE */
 #screen-phrase{
 position:fixed;
@@ -1085,6 +1116,10 @@ animation-delay:600ms;
       </div>
 
       <div class='locations-hotspot store-link' aria-label='Can or Not locations'></div>
+      <div class='bird-hotspot' id='birdHotspot' aria-label='Hear from the bird'></div>
+      <div class='bird-panel' id='birdPanel'>
+  <img src='birdsign.png' alt='Aiyo. Stop procrastinating and get on with it.' />
+</div>
 
     </div>
 
@@ -1245,6 +1280,8 @@ animation-delay:600ms;
   const expireMsg = document.getElementById('expireMsg'); // (kept for future use)
   const failBottom = document.getElementById('failBottom');
   const btnShare = document.getElementById('btnShare');
+  const birdHotspot = document.getElementById('birdHotspot');
+const birdPanel = document.getElementById('birdPanel');
 
   const storeModal = document.getElementById('storeModal');
   const closeStores = document.getElementById('closeStores');
@@ -1389,7 +1426,7 @@ const PHRASE_BREAKS = {
   'Steady lah, got standard': 'Steady lah,<br>got standard',
 
   'Queue until like this, must be good eh':
-   'Queue until<br>like this must<br>be good eh',
+   'Queue until like this<br>must be good eh',
 
   'Wah lao today very hot sia':
     'Wah lao today very hot sia',
@@ -1452,6 +1489,17 @@ const PHRASE_BREAKS = {
     'Alamak<br>why like that'
     
 };
+
+if(birdHotspot && birdPanel){
+  birdHotspot.addEventListener('click', () => {
+    birdPanel.style.display =
+      birdPanel.style.display === 'block' ? 'none' : 'block';
+  });
+
+  birdPanel.addEventListener('click', () => {
+    birdPanel.style.display = 'none';
+  });
+}
 
   // ---------- STORE MODAL ----------
   storeLinks.forEach(el => el.addEventListener('click', () => {
