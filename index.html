@@ -892,7 +892,7 @@ padding-left:3px;
 
 .success-main{
   position:relative;
-  top:25px;
+  top:10px;
   font-family:'Brushfire',sans-serif;
   font-weight:500;
   letter-spacing:1px;
@@ -913,7 +913,7 @@ padding-left:3px;
   display:block;
   width:50%;
   height:auto;
-  margin:15px auto 20px;
+  margin:0px auto 20px;
   clip-path:inset(0 100% 0 0);
  animation:slashReveal 300ms ease-out forwards;
 animation-delay:600ms;
@@ -1913,7 +1913,7 @@ const enterApp = () => {
   }
 
 // ---------- BOOT ----------
-scheduleGates();  // enforce gates immediately
+applyGates();  // enforce gates immediately
 gotoPhone();
 
 })();
