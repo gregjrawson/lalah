@@ -592,6 +592,18 @@ display:inline-block;
 transform:scaleX(1.25);
 }
 
+.chop-hotspot{
+  position:absolute;
+ left:20%;
+bottom:11%;
+width:38%;
+height:13%;
+  z-index:21;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  background:rgba(255,0,0,0.4);
+}
+
 .kopi-hotspot{
   position:absolute;
   right:0%;
@@ -653,7 +665,7 @@ transform:scaleX(1.25);
   top:50%;
   transform:translate(-50%,-50%);
   width:110vw;
-  max-width:400px;
+  max-width:500px;
   z-index:30;
 }
 
@@ -662,6 +674,23 @@ transform:scaleX(1.25);
   width:100%;
   height:auto;
   filter:drop-shadow(0 12px 14px rgba(0,0,0,0.55));
+}
+
+.chop-panel{
+  display:none;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:90vw;
+  max-width:400px;
+  z-index:30;
+}
+
+.chop-panel img{
+  display:block;
+  width:100%;
+  height:auto;
 }
 
 .kopi-panel{
@@ -1250,7 +1279,12 @@ font-weight:400;
                 <div class='msg' id='phoneMsg'></div>
                 </div>
       </div>
+      
+<div class='chop-hotspot' id='chopHotspot' aria-label='Confirm plus chop'></div>
 
+<div class='chop-panel' id='chopPanel'>
+  <img src='chopsign.png' alt='How to confirm if you haven’t tried?!??' />
+</div>
       <div class='kopi-hotspot' id='kopiHotspot' aria-label='Kopi order'></div>
       <div class='sign54-hotspot' id='sign54Hotspot' aria-label='BLK 54'></div>
       <div class='about-hotspot' id='aboutHotspot' aria-label='What is Can or Not?'></div>
@@ -1430,6 +1464,8 @@ font-weight:400;
 const birdPanel = document.getElementById('birdPanel');
 const sign54Hotspot = document.getElementById('sign54Hotspot');
 const sign54Panel = document.getElementById('sign54Panel');
+const chopHotspot = document.getElementById('chopHotspot');
+const chopPanel = document.getElementById('chopPanel');
 const kopiHotspot = document.getElementById('kopiHotspot');
 const kopiPanel = document.getElementById('kopiPanel');
 
@@ -1639,6 +1675,17 @@ const PHRASE_BREAKS = {
     'Alamak<br>why like that'
     
 };
+
+if(chopHotspot && chopPanel){
+  chopHotspot.addEventListener('click', () => {
+    chopPanel.style.display =
+      chopPanel.style.display === 'block' ? 'none' : 'block';
+  });
+
+  chopPanel.addEventListener('click', () => {
+    chopPanel.style.display = 'none';
+  });
+}
 
 if(kopiHotspot && kopiPanel){
   kopiHotspot.addEventListener('click', () => {
