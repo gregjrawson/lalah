@@ -1922,10 +1922,10 @@ const enterApp = () => {
   
 
   btnSalah.addEventListener('click', () => {
-  new Image().src =
+  fetch(
     'https://script.google.com/macros/s/AKfycbzz3yGeLl-BAdWdLwU_gFwsQ9qKCT1tXtoxvcZUaqWybju8HONDdd9yzeltZbhVKt2N/exec?loc=' +
     encodeURIComponent(new URLSearchParams(window.location.search).get('loc') || '') +
-    '&result=FAIL&t=' + Date.now();
+    '&result=FAIL&t=' + Date.now());
   gotoFail();
 });
   btnRetry.addEventListener('click', gotoPhrase);
