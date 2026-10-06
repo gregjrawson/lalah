@@ -592,6 +592,16 @@ display:inline-block;
 transform:scaleX(1.25);
 }
 
+.sign54-hotspot{
+  position:absolute;
+  left:40%;
+  top:14%;
+  width:38%;
+  height:9%;
+  z-index:21;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
 .about-hotspot{
   position:absolute;
   left:0%;
@@ -623,6 +633,20 @@ transform:scaleX(1.25);
   z-index:21;
   -webkit-tap-highlight-color: transparent;
   cursor:pointer;
+}
+.sign54-panel{
+  display:none;
+  position:absolute;
+  left:4%;
+  top:15%;
+  width:300px;
+  z-index:30;
+}
+
+.sign54-panel img{
+  display:block;
+  width:100%;
+  height:auto;
 }
 
 .bird-panel{
@@ -1182,9 +1206,13 @@ font-weight:400;
                 </div>
       </div>
 
+      <div class='sign54-hotspot' id='sign54Hotspot' aria-label='BLK 54'></div>
       <div class='about-hotspot' id='aboutHotspot' aria-label='What is Can or Not?'></div>
       <div class='locations-hotspot store-link' aria-label='Can or Not locations'></div>
       <div class='bird-hotspot' id='birdHotspot' aria-label='Hear from the bird'></div>
+      <div class='sign54-panel' id='sign54Panel'>
+  <img src='54sign.png' alt='Wah. You click everything ah?' />
+</div>
       <div class='bird-panel' id='birdPanel'>
   <img src='birdsign.png' alt='Aiyo. Stop procrastinating and get on with it.' />
 </div>
@@ -1348,6 +1376,8 @@ font-weight:400;
   const btnShare = document.getElementById('btnShare');
   const birdHotspot = document.getElementById('birdHotspot');
 const birdPanel = document.getElementById('birdPanel');
+const sign54Hotspot = document.getElementById('sign54Hotspot');
+const sign54Panel = document.getElementById('sign54Panel');
 
   const storeModal = document.getElementById('storeModal');
   const closeStores = document.getElementById('closeStores');
@@ -1555,6 +1585,17 @@ const PHRASE_BREAKS = {
     'Alamak<br>why like that'
     
 };
+
+if(sign54Hotspot && sign54Panel){
+  sign54Hotspot.addEventListener('click', () => {
+    sign54Panel.style.display =
+      sign54Panel.style.display === 'block' ? 'none' : 'block';
+  });
+
+  sign54Panel.addEventListener('click', () => {
+    sign54Panel.style.display = 'none';
+  });
+}
 
 if(birdHotspot && birdPanel){
   birdHotspot.addEventListener('click', () => {
