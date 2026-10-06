@@ -592,12 +592,23 @@ display:inline-block;
 transform:scaleX(1.25);
 }
 
+.kopi-hotspot{
+  position:absolute;
+  right:0%;
+  top:20%;
+  width:25%;
+  height:25%;
+  z-index:21;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
 .sign54-hotspot{
   position:absolute;
   left:40%;
-  top:14%;
+  top:12%;
   width:38%;
-  height:9%;
+  height:10%;
   z-index:21;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
@@ -634,6 +645,22 @@ transform:scaleX(1.25);
   -webkit-tap-highlight-color: transparent;
   cursor:pointer;
 }
+
+.kopi-panel{
+  display:none;
+  position:absolute;
+  right:4%;
+  top:24%;
+  width:260px;
+  z-index:30;
+}
+
+.kopi-panel img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
 .sign54-panel{
   display:none;
   position:absolute;
@@ -1206,10 +1233,14 @@ font-weight:400;
                 </div>
       </div>
 
+      <div class='kopi-hotspot' id='kopiHotspot' aria-label='Kopi order'></div>
       <div class='sign54-hotspot' id='sign54Hotspot' aria-label='BLK 54'></div>
       <div class='about-hotspot' id='aboutHotspot' aria-label='What is Can or Not?'></div>
       <div class='locations-hotspot store-link' aria-label='Can or Not locations'></div>
       <div class='bird-hotspot' id='birdHotspot' aria-label='Hear from the bird'></div>
+      <div class='kopi-panel' id='kopiPanel'>
+  <img src='kopisign.png' alt='Want kopi? Know how to order or not?' />
+</div>
       <div class='sign54-panel' id='sign54Panel'>
   <img src='54sign.png' alt='Wah. You click everything ah?' />
 </div>
@@ -1378,6 +1409,8 @@ font-weight:400;
 const birdPanel = document.getElementById('birdPanel');
 const sign54Hotspot = document.getElementById('sign54Hotspot');
 const sign54Panel = document.getElementById('sign54Panel');
+const kopiHotspot = document.getElementById('kopiHotspot');
+const kopiPanel = document.getElementById('kopiPanel');
 
   const storeModal = document.getElementById('storeModal');
   const closeStores = document.getElementById('closeStores');
@@ -1585,6 +1618,17 @@ const PHRASE_BREAKS = {
     'Alamak<br>why like that'
     
 };
+
+if(kopiHotspot && kopiPanel){
+  kopiHotspot.addEventListener('click', () => {
+    kopiPanel.style.display =
+      kopiPanel.style.display === 'block' ? 'none' : 'block';
+  });
+
+  kopiPanel.addEventListener('click', () => {
+    kopiPanel.style.display = 'none';
+  });
+}
 
 if(sign54Hotspot && sign54Panel){
   sign54Hotspot.addEventListener('click', () => {
