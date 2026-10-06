@@ -646,6 +646,24 @@ transform:scaleX(1.25);
   cursor:pointer;
 }
 
+.about-home-panel{
+  display:none;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:110vw;
+  max-width:400px;
+  z-index:30;
+}
+
+.about-home-panel img{
+  display:block;
+  width:100%;
+  height:auto;
+  filter:drop-shadow(0 12px 14px rgba(0,0,0,0.55));
+}
+
 .kopi-panel{
   display:none;
   position:absolute;
@@ -1238,6 +1256,9 @@ font-weight:400;
       <div class='about-hotspot' id='aboutHotspot' aria-label='What is Can or Not?'></div>
       <div class='locations-hotspot store-link' aria-label='Can or Not locations'></div>
       <div class='bird-hotspot' id='birdHotspot' aria-label='Hear from the bird'></div>
+      <div class='about-home-panel' id='aboutHomePanel'>
+  <img src='aboutsign.webp' alt='About can or not' />
+</div>
       <div class='kopi-panel' id='kopiPanel'>
   <img src='kopisign.png' alt='Want kopi? Know how to order or not?' />
 </div>
@@ -1662,10 +1683,16 @@ const aboutLinkReward = document.getElementById('aboutLinkReward');
 const aboutLinkDesktop = document.getElementById('aboutLinkDesktop');
 const aboutModal = document.getElementById('aboutModal');
 const aboutHotspot = document.getElementById('aboutHotspot');
+const aboutHomePanel = document.getElementById('aboutHomePanel');
 const closeAbout = document.getElementById('closeAbout');
-if(aboutHotspot){
+if(aboutHotspot && aboutHomePanel){
   aboutHotspot.addEventListener('click', () => {
-    if(aboutModal) aboutModal.style.display = 'flex';
+    aboutHomePanel.style.display =
+      aboutHomePanel.style.display === 'block' ? 'none' : 'block';
+  });
+
+  aboutHomePanel.addEventListener('click', () => {
+    aboutHomePanel.style.display = 'none';
   });
 }
 
